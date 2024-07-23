@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import './DiaryDate.css'
 
 export default function DiaryDate() {
     return (
