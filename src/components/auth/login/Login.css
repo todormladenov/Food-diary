@@ -1,0 +1,64 @@
+.login-section {
+    margin: 10em auto;
+    max-width: 600px;
+    background: white;
+    border-radius: 0.3em;
+}
+
+.login-form {
+    margin: 0 auto;
+    padding: 1em;
+}
+
+.login-form h2 {
+    color: #07ad90
+}
+
+.field-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2em;
+    position: relative;
+}
+
+.field-wrapper input[type="text"],
+.field-wrapper input[type="password"] {
+    border: none;
+    outline: none;
+    line-height: 2em;
+    border-bottom: 2px solid #07ad90;
+    background: transparent;
+    outline: none;
+}
+
+.field-wrapper label {
+    position: absolute;
+    font-weight: bold;
+    top: 0.4em;
+    opacity: 0;
+    transition:
+        transform 0.3s ease-in-out,
+        opacity 0.3s ease-in;
+}
+
+.field-wrapper input:not(:placeholder-shown) ~ label {
+    transform: translateY(-1.5em);
+    opacity: 1;
+    color: #42509e;
+}
+
+.field-wrapper input[type="submit"] {
+    border: none;
+    margin: 0 auto;
+    padding: 0.75em 1.5em;
+    background: #07ad90;
+    color: white;
+    border-radius: 0.3em;
+    cursor: pointer;
+    transition: ease-in 0.3s;
+}
+
+.field-wrapper input[type="submit"]:hover {
+    background: #025a4b;
+    transform: scale(1.1);
+}
