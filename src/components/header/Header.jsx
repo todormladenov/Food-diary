@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 import logo from '../../assets/3d-old-text-2-1-1024x1024.png';
 import './Header.css';
+import { getTodayDate } from '../../utils/get-dates';
 
 export default function Header() {
+    const todayDate = getTodayDate();
 
     return (
         <>
@@ -16,7 +18,7 @@ export default function Header() {
                             <Link className="link" to='/'>HOME</Link>
                         </li>
                         <li>
-                            <Link className="link active" to="/diary/10 09 2024" >DIARY</Link>
+                            <Link className="link active" to={`/diary/${todayDate}`} >DIARY</Link>
                         </li>
                         <li>
                             <Link className="link" to="/create-food">CREATE FOOD</Link>
