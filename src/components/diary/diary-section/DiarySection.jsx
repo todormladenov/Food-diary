@@ -1,9 +1,12 @@
+import { useParams } from "react-router-dom";
 import DiaryDate from "./diary-date/DiaryDate";
 
 export default function DiarySection() {
+    const { diaryDate } = useParams();
+
     return (
         <>
-            <DiaryDate />
+            <DiaryDate diaryDate={diaryDate} />
 
             <section className="food-diary">
                 <table className="diary">
