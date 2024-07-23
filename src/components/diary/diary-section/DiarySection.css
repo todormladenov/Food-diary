@@ -1,0 +1,75 @@
+table {
+    border-collapse: collapse;
+    display: block;
+}
+
+.col-one {
+    width: 500px;
+    height: auto;
+}
+
+.col-two {
+    width: 50px;
+    height: auto;
+}
+
+.col-six {
+    width: 30px;
+    height: auto;
+}
+
+table tbody {
+    padding: 0.5em;
+}
+
+table tbody tr {
+    background: #eee;
+    text-align: center;
+}
+
+tr td {
+    border: 1px solid white;
+    padding: 0.5em;
+}
+
+table tbody .first {
+    text-align: left;
+}
+
+/* meal-top */
+
+tbody .meal-top {
+    color: white;
+    font-weight: bold;
+    background: #07ad90;
+}
+
+tbody .meal-top .first {
+    font-size: medium;
+    background: white;
+    color: #42509e;
+    padding: 1em 0.3em 0.5em;
+}
+
+/* meal-bottom */
+
+.meal-bottom {
+    background: white;
+    border-bottom: 2px solid #eee;
+    color: #42509e;
+    font-weight: bold;
+}
+
+.diary .meal-bottom a {
+    border: none;
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 2px solid transparent;
+    transition: ease 0.3s;
+}
+
+.diary a:hover {
+    border: none;
+    border-bottom: 2px solid #42509e;
+    cursor: pointer;
+}
