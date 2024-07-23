@@ -1,16 +1,12 @@
-.login-section {
+.form {
     margin: 10em auto;
     max-width: 600px;
-    background: white;
-    border-radius: 0.3em;
-}
-
-.login-form {
-    margin: 0 auto;
     padding: 1em;
+    border-radius: 0.3em;
+    background: white;
 }
 
-.login-form h2 {
+.form h2 {
     color: #07ad90
 }
 
