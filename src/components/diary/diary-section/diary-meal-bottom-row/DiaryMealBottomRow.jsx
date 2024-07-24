@@ -1,16 +1,19 @@
 import { Link } from "react-router-dom";
 import './DiaryMealBottomRow.css'
+import calculateMacros from "../../../../utils/calculateMacros";
 
-export default function DiaryMealBottomRow() {
+export default function DiaryMealBottomRow({ food }) {
+    const totalMacros = calculateMacros(food);
+
     return (
         <tr className="meal-bottom">
             <td className="first">
                 <Link to={`/add-food/mealType/dateId`}>Add Food</Link>
             </td>
-            <td>180</td>
-            <td>40</td>
-            <td>0</td>
-            <td>1</td>
+            <td>{totalMacros.calories}</td>
+            <td>{totalMacros.carbs}</td>
+            <td>{totalMacros.fat}</td>
+            <td>{totalMacros.protein}</td>
             <td />
         </tr>
     );
