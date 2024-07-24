@@ -1,32 +1,17 @@
 import DiaryMealTopRow from "../diary-meal-top-row/DiaryMealTopRow";
 import DiaryMealBottomRow from "../diary-meal-bottom-row/DiaryMealBottomRow";
+import DiaryMealFoodRow from "../diary-meal-food-row/DiaryMealFoodRow";
 
-export default function DiaryBreakfast() {
+export default function DiaryBreakfast({ breakfast }) {
     const mealType = 'Breakfast';
 
     return (
         <>
             <DiaryMealTopRow mealType={mealType} />
 
-            <tr>
-                <td className="first">Banana | 1 servings</td>
-                <td>90</td>
-                <td>20</td>
-                <td>0</td>
-                <td>1</td>
-                <td>Remove</td>
-            </tr>
+            {breakfast.map((food, i) => <DiaryMealFoodRow key={i} food={food} />)}
 
-            <tr>
-                <td className="first">Banana | 1 servings</td>
-                <td>90</td>
-                <td>20</td>
-                <td>0</td>
-                <td>1</td>
-                <td>Remove</td>
-            </tr>
-
-            <DiaryMealBottomRow />
+            <DiaryMealBottomRow food={breakfast} />
         </>
     );
 }
