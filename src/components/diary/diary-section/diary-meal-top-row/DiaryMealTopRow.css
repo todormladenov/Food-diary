@@ -1,0 +1,12 @@
+tbody .meal-top {
+    color: white;
+    font-weight: bold;
+    background: #07ad90;
+}
+
+tbody .meal-top .first {
+    font-size: medium;
+    background: white;
+    color: #42509e;
+    padding: 1em 0.3em 0.5em;
+}
