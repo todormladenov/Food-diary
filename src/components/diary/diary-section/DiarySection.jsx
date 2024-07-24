@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import DiaryDate from "./diary-date/DiaryDate";
 import './DiarySection.css'
 import DiaryBreakfast from "./diary-breakfast/DiaryBreakfast";
+import DiaryLunch from "./diary-lunch/DiaryLunch";
 
 export default function DiarySection() {
     const { diaryDate } = useParams();
@@ -23,6 +24,7 @@ export default function DiarySection() {
                     <tbody>
 
                         <DiaryBreakfast />
+                        <DiaryLunch />
 
                     </tbody>
                 </table>
