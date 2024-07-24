@@ -1,0 +1,20 @@
+.meal-bottom {
+    background: white;
+    border-bottom: 2px solid #eee;
+    color: #42509e;
+    font-weight: bold;
+}
+
+.diary .meal-bottom a {
+    border: none;
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 2px solid transparent;
+    transition: ease 0.3s;
+}
+
+.diary a:hover {
+    border: none;
+    border-bottom: 2px solid #42509e;
+    cursor: pointer;
+}
