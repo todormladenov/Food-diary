@@ -3,6 +3,7 @@ import DiaryDate from "./diary-date/DiaryDate";
 import './DiarySection.css'
 import DiaryBreakfast from "./diary-breakfast/DiaryBreakfast";
 import DiaryLunch from "./diary-lunch/DiaryLunch";
+import DiaryDinner from "./diary-dinner/DiaryDinner";
 
 export default function DiarySection() {
     const { diaryDate } = useParams();
@@ -25,6 +26,8 @@ export default function DiarySection() {
 
                         <DiaryBreakfast />
                         <DiaryLunch />
+                        <DiaryDinner />
+                        
 
                     </tbody>
                 </table>
