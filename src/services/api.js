@@ -11,7 +11,7 @@ async function requester(method, url, data) {
     }
 
     if (data !== undefined) {
-        options.headers = { 'content-type': 'application/json' };
+        options.headers['Content-type'] = 'application/json';
         options.body = JSON.stringify(data);
     }
 
