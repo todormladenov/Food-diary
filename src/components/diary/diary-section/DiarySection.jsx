@@ -20,10 +20,9 @@ export default function DiarySection() {
             if (diary == undefined) {
                 diary = { userId: 'PCwMKhyzR1', diaryDate };
                 const newDiary = await createDiaryDate(diary);
-                
+
                 diary = { ...diary, ...newDiary };
             }
-
             setDiary(diary);
         })();
 
@@ -45,10 +44,25 @@ export default function DiarySection() {
                     </colgroup>
                     <tbody>
 
-                        <DiaryBreakfast breakfast={diary.breakfast || []} />
-                        <DiaryLunch lunch={diary.lunch || []} />
-                        <DiaryDinner dinner={diary.dinner || []} />
-                        <DiarySnack snack={diary.snack || []} />
+                        <DiaryBreakfast
+                            dateId={diary.objectId}
+                            breakfast={diary.breakfast || []}
+                        />
+
+                        <DiaryLunch
+                            dateId={diary.objectId}
+                            lunch={diary.lunch || []}
+                        />
+
+                        <DiaryDinner
+                            dateId={diary.objectId}
+                            dinner={diary.dinner || []}
+                        />
+
+                        <DiarySnack
+                            dateId={diary.objectId}
+                            snack={diary.snack || []}
+                        />
 
                     </tbody>
                 </table>
