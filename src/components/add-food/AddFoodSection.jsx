@@ -1,17 +1,22 @@
 import { Link, useParams } from "react-router-dom";
 import './AddFoodSection.css';
 import { useForm } from "../../hooks/useForm";
+import { useState } from "react";
+import { searchFoodsByName } from "../../services/foodAPI";
 
 const initialValues = { name: '' }
 
 export default function AddFoodSection() {
     const { mealType, dateId } = useParams();
-    
-    const searchFood = async (values) => {
-        
+    const [foods, setFoods] = useState([]);
+
+    const searchFoodHandler = async (values) => {
+        const foodsResult = await searchFoodsByName(values);
+
+        setFoods(foodsResult.results);
     }
-    
-    const { formValues, changeHandler, submitHandler } = useForm(initialValues, searchFood);
+
+    const { formValues, changeHandler, submitHandler } = useForm(initialValues, searchFoodHandler);
     return (
         <>
             <header className="headers">
