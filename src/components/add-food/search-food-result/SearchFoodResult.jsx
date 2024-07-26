@@ -1,3 +1,5 @@
+import './SearchFoodResult.css'
+
 export default function SearchFoodResult({ food }) {
     return (
         <form className="add-meal-form">

@@ -1,0 +1,46 @@
+.add-meal-form {
+    background: #eee;
+    margin: 1em 0;
+    position: relative;
+    border-radius: 0.3em;
+}
+
+.add-meal-form .food-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em 0.3em;
+    transition: ease-in 0.3s;
+}
+
+.food-row:hover {
+    background: #ccc;
+}
+
+.food-row label {
+    flex: 1 1 auto;
+}
+
+.food-row p {
+    flex: 0 1 100px;
+}
+
+.food-row input[type=number] {
+    width: 50px;
+}
+
+.food-row .btn {
+    padding: 0.2em 0.75em;
+    border-radius: 0.3em;
+    background: #07ad90;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+}
+
+.btn:hover {
+    padding: 1em;
+}
