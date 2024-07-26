@@ -3,6 +3,7 @@ import './AddFoodSection.css';
 import { useForm } from "../../hooks/useForm";
 import { useState } from "react";
 import { searchFoodsByName } from "../../services/foodAPI";
+import SearchFoodResult from "./search-food-result/SearchFoodResult";
 
 const initialValues = { name: '' }
 
@@ -32,6 +33,14 @@ export default function AddFoodSection() {
                 <button type="submit">Search</button>
 
             </form>
+
+            {
+                foods.map(food =>
+                    <SearchFoodResult
+                        key={food.objectId}
+                        food={food}
+                    />)
+            }
 
             <div className="meal-type">
                 <h5>Meal Type:</h5>
