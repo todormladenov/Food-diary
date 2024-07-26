@@ -1,19 +1,27 @@
 import { Link, useParams } from "react-router-dom";
 import './AddFoodSection.css';
+import { useForm } from "../../hooks/useForm";
+
+const initialValues = { name: '' }
 
 export default function AddFoodSection() {
     const { mealType, dateId } = useParams();
-
+    
+    const searchFood = async (values) => {
+        
+    }
+    
+    const { formValues, changeHandler, submitHandler } = useForm(initialValues, searchFood);
     return (
         <>
             <header className="headers">
                 <h2>Add Food</h2>
             </header>
 
-            <form className="search-form">
+            <form className="search-form" onSubmit={submitHandler}>
                 <div className="form-row">
                     <label htmlFor="name">Food Name</label>
-                    <input id="name" name="name" type="text" placeholder="eg. Rice" />
+                    <input id="name" name="name" type="text" placeholder="eg. Rice" value={formValues.name} onChange={changeHandler} />
                 </div>
 
                 <button type="submit">Search</button>
