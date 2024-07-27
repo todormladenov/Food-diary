@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import './DiaryMealBottomRow.css'
-import calculateMacros from "../../../../utils/calculateMacros";
+import { calculateTotalMealMacros } from "../../../../utils/calculateMacros";
 
 export default function DiaryMealBottomRow({ food, mealType, dateId }) {
-    const totalMacros = calculateMacros(food);
+    const totalMacros = calculateTotalMealMacros(food);
     mealType = mealType?.toLocaleLowerCase();
 
     return (
