@@ -24,7 +24,7 @@ export default function Header() {
                             <Link className="link" to="/create-food">CREATE FOOD</Link>
                         </li>
                         <li>
-                            <Link className="link" to="/calculator">CALCULATOR</Link>
+                            <Link className="link" to="/calories-calculator">CALORIES CALCULATOR</Link>
                         </li>
                     </ul>
                 </div>
