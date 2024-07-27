@@ -1,0 +1,125 @@
+.calories-section {
+    display: flex;
+    gap: 2em;
+    flex-wrap: wrap;
+    margin: 5em auto;
+}
+
+.calculate-form {
+    flex: 0 1 40%;
+    display: flex;
+    gap: 0.5em;
+    flex-direction: column;
+    background: #E3EDDA;
+    border-radius: 1em;
+    padding: 0 1em;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.calculate-form .form-row {
+    flex: 0 1 auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.calculate-form .form-row label {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    color: #333;
+}
+
+.calculate-form .form-row input,
+.calculate-form .form-row select {
+    border: 1px solid #ccc;
+    outline: none;
+    border-radius: 0.3em;
+    padding: 0.5em;
+    margin-top: 0.3em;
+    background-color: white;
+    font-size: 1em;
+    color: #333;
+    transition: border-color 0.3s; 
+}
+
+.unit {
+    position: absolute;
+    top: 2.4em;
+    right: 2em;
+    color: #888;
+}
+
+.calculate-form .form-row input:focus,
+.calculate-form .form-row select:focus {
+    border-color: #07ad90;
+}
+
+.calculate-form .form-row select {
+    background: #E3EDDA;
+}
+
+.calories-section button {
+    border: none;
+    background: #07ad90;
+    color: white;
+    padding: 1em 1.5em;
+    margin: 1em auto;
+    border-radius: 0.3em;
+    transition: ease-in 0.2s;
+}
+
+.calories-section button:hover {
+    background: #025a4b;
+    cursor: pointer;
+}
+
+.result {
+    flex: 1 0 40%;
+    background: #E3EDDA;
+    border-radius: 1em;
+    padding: 0 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.result-row {
+    display: flex;
+    font-size: 16px;
+    gap: 1em;
+    margin-top: 1em;
+}
+
+.result-row p {
+    flex: 1 0 100px;
+    padding: 0.75em 0.5em;
+    border: 2px solid #ccc;
+    border-radius: 0.3em;
+    background-color: #f9f9f9;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.result-row p:hover {
+    background-color: #e0e0e0; 
+    color: #000;
+}
+
+.result-row p:first-child {
+    background-color: #e3edda;
+    color: #555;
+}
+
+.result-row p:last-child {
+    background-color: #07ad90;
+    color: white;
+}
+
+.result-row p:hover {
+    transform: scale(1.05); 
+}
