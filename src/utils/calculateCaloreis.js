@@ -20,7 +20,7 @@ export const calculateCalories = (values) => {
 
     const proteinGrams = 2 * weight;
     const fatCalories = (dailyCalories * 0.3)
-    
+
     const proteinCalories = proteinGrams * 4;
     const fatGrams = fatCalories / 9;
 

@@ -1,8 +1,7 @@
-import { useState } from 'react';
 import { useForm } from '../../hooks/useForm';
-import { calculateCalories } from '../../utils/calculateCaloreis';
 import './CaloriesCalculator.css'
 import NutritionGoal from './nutrition-goal/NutritionGoal';
+import { useNutritionGoal } from '../../hooks/useNutritionGoal';
 
 const initialValues = {
     weight: 82,
@@ -13,13 +12,10 @@ const initialValues = {
 }
 
 export default function CaloriesCalculator() {
-    const [isShown, setIsShown] = useState(false);
-    const [nutritionGoal, setNutritionGoal] = useState({});
+    const { isShown, nutritionGoal, changeNutritionGoal } = useNutritionGoal();
 
     const calculateCaloriesHandler = (values) => {
-        const result = calculateCalories(values);
-        setNutritionGoal(result);
-        setIsShown(true);
+        changeNutritionGoal(values);
     }
 
     const { formValues, changeHandler, submitHandler } = useForm(initialValues, calculateCaloriesHandler);
