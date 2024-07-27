@@ -1,9 +1,9 @@
 import createPointer from "../utils/createPointer";
-import { get, post } from "./api";
+import { get, post, put } from "./api";
 
 const baseUrl = 'https://parseapi.back4app.com/classes/Date';
 
-export const getOneDate = async (userId, diaryDate) => {
+export const getOneDiaryDate = async (userId, diaryDate) => {
     const constraints = {
         dateString: diaryDate,
         userId: createPointer('_User', userId),
@@ -23,3 +23,7 @@ export const createDiaryDate = async ({ userId, diaryDate }) => {
     const body = { userId: pointer, dateString: diaryDate };
     return post(baseUrl, body);
 }
+
+export const getOneDiaryDateById = (dateId) => get(`${baseUrl}/${dateId}`);
+
+export const updateDiaryDateById = (dateId, diaryData) => put(`${baseUrl}/${dateId}`, diaryData);
