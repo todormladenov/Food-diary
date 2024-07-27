@@ -3,7 +3,7 @@ import { useState } from "react"
 export const useNutritionInfo = () => {
     const [isShown, setIsShown] = useState(false);
 
-    const showNutritionInfo = (food) => {
+    const showNutritionInfo = () => {
         setIsShown(true);
     }
 
