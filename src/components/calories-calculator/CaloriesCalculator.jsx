@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { useForm } from '../../hooks/useForm';
 import { calculateCalories } from '../../utils/calculateCaloreis';
 import './CaloriesCalculator.css'
+import NutritionGoal from './nutrition-goal/NutritionGoal';
 
 const initialValues = {
     weight: 82,
@@ -11,9 +13,13 @@ const initialValues = {
 }
 
 export default function CaloriesCalculator() {
+    const [isShown, setIsShown] = useState(false);
+    const [nutritionGoal, setNutritionGoal] = useState({});
 
     const calculateCaloriesHandler = (values) => {
         const result = calculateCalories(values);
+        setNutritionGoal(result);
+        setIsShown(true);
     }
 
     const { formValues, changeHandler, submitHandler } = useForm(initialValues, calculateCaloriesHandler);
@@ -25,19 +31,19 @@ export default function CaloriesCalculator() {
                     <h3 className='headers'>Calculate your calories</h3>
                     <div className="form-row">
                         <label htmlFor="weight">Weight</label>
-                        <input type="number" id="weight" name="weight" placeholder='82' value={formValues.weight} onChange={changeHandler}/>
+                        <input type="number" id="weight" name="weight" placeholder='82' value={formValues.weight} onChange={changeHandler} />
                         <span className='unit'>kg</span>
                     </div>
 
                     <div className="form-row">
                         <label htmlFor="height">Height</label>
-                        <input type="number" id="height" name="height" placeholder='180' value={formValues.height} onChange={changeHandler}/>
+                        <input type="number" id="height" name="height" placeholder='180' value={formValues.height} onChange={changeHandler} />
                         <span className='unit'>cm</span>
                     </div>
 
                     <div className="form-row">
                         <label htmlFor="age">Age</label>
-                        <input type="number" id="age" name="age" placeholder='24' value={formValues.age} onChange={changeHandler}/>
+                        <input type="number" id="age" name="age" placeholder='24' value={formValues.age} onChange={changeHandler} />
                     </div>
 
                     <div className="form-row">
@@ -63,32 +69,9 @@ export default function CaloriesCalculator() {
                         <button type="submit">Calculate</button>
                     </div>
                 </form>
-
-                <div className="result">
-                    <h3 className='headers'>Daily Nutrition Goals</h3>
-
-                    <div className="result-row">
-                        <p>Calories</p>
-                        <p>2500</p>
-                    </div>
-
-                    <div className="result-row">
-                        <p>Carbs</p>
-                        <p>250</p>
-                    </div>
-
-                    <div className="result-row">
-                        <p>Fat</p>
-                        <p>75</p>
-                    </div>
-
-                    <div className="result-row">
-                        <p>Protein</p>
-                        <p>180</p>
-                    </div>
-
-                    <button>Save Goal</button>
-                </div>
+                {isShown &&
+                    <NutritionGoal nutritionGoal={nutritionGoal} />
+                }
             </div>
         </>
     );
