@@ -6,7 +6,7 @@ import DiaryLunch from "./diary-lunch/DiaryLunch";
 import DiaryDinner from "./diary-dinner/DiaryDinner";
 import DiarySnack from "./diary-snack/DiarySnack";
 import { useEffect, useState } from "react";
-import { createDiaryDate, getOneDate } from "../../../services/dateAPI";
+import { createDiaryDate, getOneDiaryDate } from "../../../services/dateAPI";
 
 export default function DiarySection() {
     const [diary, setDiary] = useState({});
@@ -14,7 +14,7 @@ export default function DiarySection() {
 
     useEffect(() => {
         (async () => {
-            const result = await getOneDate('PCwMKhyzR1', diaryDate);
+            const result = await getOneDiaryDate('PCwMKhyzR1', diaryDate);
             let diary = result.results[0]
 
             if (diary == undefined) {
