@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import '../Auth.css';
 import { login } from '../../../services/authAPI';
 import { useForm } from '../../../hooks/useForm';
+import { useContext } from 'react';
+import { AuthContext } from '../../../contexts/AuthContext';
 
 const initialValues = {
     username: '',
@@ -9,9 +11,11 @@ const initialValues = {
 }
 
 export default function Login() {
+    const authState = useContext(AuthContext);
 
     const loginHandler = async (values) => {
         const user = await login(values.username, values.password);
+        authState.changeAuthState(user);
     }
 
     const { formValues, changeHandler, submitHandler } = useForm(initialValues, loginHandler);
