@@ -1,5 +1,7 @@
 import { post } from "./api";
 
-const baseUrl = 'https://parseapi.back4app.com/users';
+const baseUrl = 'https://parseapi.back4app.com/';
 
-export const register = (username, password) => post(baseUrl, {username, password});
+export const register = (username, password) => post(`${baseUrl}/users`, {username, password});
+
+export const login = (username, password) => post(`${baseUrl}/login`, {username, password});
