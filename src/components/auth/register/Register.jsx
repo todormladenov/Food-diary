@@ -1,23 +1,53 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../Auth.css'
+import { useForm } from "../../../hooks/useForm";
+import { register } from "../../../services/authAPI";
+
+const initialValues = {
+    username: '',
+    password: '',
+    rePassword: '',
+}
 
 export default function Register() {
+    const navigator = useNavigate();
+
+    const registerHandler = async (values) => {
+        await register(values.username, values.password);
+        navigator('/auth/login');
+    }
+
+    const { formValues, changeHandler, submitHandler } = useForm(initialValues, registerHandler);
     return (
-        <form className="form">
+        <form className="form" onSubmit={submitHandler}>
             <h2>Register</h2>
 
             <div className="field-wrapper">
-                <input type="text" id="username" name="username" placeholder='Username' autoComplete="on" />
+                <input type="text" id="username" name="username" placeholder='Username' autoComplete="on"
+                    value={formValues.username}
+                    onChange={changeHandler}
+                    required
+                    minLength={4}
+                />
                 <label htmlFor="username">Username</label>
             </div>
 
             <div className="field-wrapper">
-                <input type="password" id="password" name="password" placeholder='Password' autoComplete="on" />
+                <input type="password" id="password" name="password" placeholder='Password' autoComplete="on"
+                    value={formValues.password}
+                    onChange={changeHandler}
+                    required
+                    minLength={8}
+                />
                 <label htmlFor="password">Password</label>
             </div>
 
             <div className="field-wrapper">
-                <input type="password" id="rePassword" name="rePassword" placeholder='Repeat Password' autoComplete="on" />
+                <input type="password" id="rePassword" name="rePassword" placeholder='Repeat Password' autoComplete="on"
+                    value={formValues.rePassword}
+                    onChange={changeHandler}
+                    required
+                />
                 <label htmlFor="rePassword">Repeat Password</label>
             </div>
 
