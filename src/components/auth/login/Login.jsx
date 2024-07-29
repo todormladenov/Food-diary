@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../Auth.css';
 import { login } from '../../../services/authAPI';
 import { useForm } from '../../../hooks/useForm';
@@ -12,10 +12,12 @@ const initialValues = {
 
 export default function Login() {
     const authState = useContext(AuthContext);
+    const navigator = useNavigate();
 
     const loginHandler = async (values) => {
         const user = await login(values.username, values.password);
         authState.changeAuthState(user);
+        navigator('/');
     }
 
     const { formValues, changeHandler, submitHandler } = useForm(initialValues, loginHandler);
