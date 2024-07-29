@@ -1,3 +1,5 @@
+import { getSessionToken } from "../utils/sessionTokenManagement";
+
 const appId = 'sFjPTda0ID1hEQPg17opOF9Eulf5c6i7DU8PGRo8';
 const apiKey = 'X8j0UvBdBpSTuSUyEgcWO0JUgSCIaQbnCKYKZrpt'
 
@@ -8,6 +10,12 @@ async function requester(method, url, data) {
             'X-Parse-Application-Id': appId,
             'X-Parse-REST-API-Key': apiKey,
         }
+    }
+
+    const sessionToken = getSessionToken();
+
+    if (sessionToken) {
+        options.headers['X-Parse-Session-Token'] = sessionToken;
     }
 
     if (data !== undefined) {
