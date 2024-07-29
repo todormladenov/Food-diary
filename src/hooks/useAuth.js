@@ -3,7 +3,7 @@ import { clearSessionToken, getSessionToken, setSessionToken } from "../utils/se
 import { authUser } from "../services/authAPI";
 
 export const useAuth = () => {
-    const [authSate, setAuthState] = useState({});
+    const [authState, setAuthState] = useState({});
 
     const changeAuthState = (state) => {
         if (state.sessionToken) {
@@ -20,7 +20,7 @@ export const useAuth = () => {
             const sessionToken = getSessionToken();
 
             if (!sessionToken) {
-                return authSate;
+                return authState;
             }
 
             const user = await authUser();
@@ -29,7 +29,7 @@ export const useAuth = () => {
     }, []);
 
     return {
-        authSate,
+        authState,
         changeAuthState
     }
 }
