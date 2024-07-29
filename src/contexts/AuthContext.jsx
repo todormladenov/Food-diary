@@ -1,7 +1,8 @@
 import { createContext, useState } from "react";
+import { useAuth } from "../hooks/useAuth";
 
 export const AuthContext = createContext({
-    email: '',
+    username: '',
     accessToken: '',
     isAuth: false,
     userId: '',
@@ -9,23 +10,13 @@ export const AuthContext = createContext({
 });
 
 export function AuthContextProvider(props) {
-    const [authState, setAuthState] = useState({})
-
-    const changeAuthState = (state) => {
-        if (state.accessToken) {
-            sessionStorage.setItem('accessToken', state.accessToken);
-        } else {
-            sessionStorage.clear();
-        }
-
-        setAuthState(state);
-    }
+    const { authState, changeAuthState } = useAuth();
 
     const contextData = {
-        username: authState.username,
-        sessionToken: authState.sessionToken,
-        isAuth: !!authState.sessionToken,
-        userId: authState.objectId,
+        username: authState?.username,
+        sessionToken: authState?.sessionToken,
+        isAuth: !!authState?.sessionToken,
+        userId: authState?.objectId,
         changeAuthState,
     }
 
