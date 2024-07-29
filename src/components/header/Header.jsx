@@ -50,7 +50,7 @@ export default function Header() {
                     (<div className="user-info">
                         <span>Hi, {authContext.username}</span>
                         <span>Goals</span>
-                        <span>Logout</span>
+                        <span onClick={authContext.logoutUser}>Logout</span>
                     </div>)
                 }
             </div >

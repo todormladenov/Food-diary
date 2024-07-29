@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
 import { clearSessionToken, getSessionToken, setSessionToken } from "../utils/sessionTokenManagement";
-import { authUser } from "../services/authAPI";
+import { authUser, logout } from "../services/authAPI";
+import { useNavigate } from "react-router-dom";
 
 export const useAuth = () => {
     const [authState, setAuthState] = useState({});
+    const navigator = useNavigate();
 
     const changeAuthState = (state) => {
         if (state.sessionToken) {
@@ -13,6 +15,13 @@ export const useAuth = () => {
         }
 
         setAuthState(state);
+    }
+
+    const logoutUser = async () => {
+        const res = await logout();
+        changeAuthState({});
+        navigator('/auth/login');
+        console.log(res);
     }
 
     useEffect(() => {
@@ -30,6 +39,7 @@ export const useAuth = () => {
 
     return {
         authState,
-        changeAuthState
+        changeAuthState,
+        logoutUser
     }
 }
