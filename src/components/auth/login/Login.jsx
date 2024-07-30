@@ -4,6 +4,7 @@ import { login } from '../../../services/authAPI';
 import { useForm } from '../../../hooks/useForm';
 import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
+import { SnackbarContext } from '../../../contexts/SnackbarContext';
 
 const initialValues = {
     username: '',
@@ -12,12 +13,17 @@ const initialValues = {
 
 export default function Login() {
     const authState = useContext(AuthContext);
+    const snackbar = useContext(SnackbarContext);
     const navigator = useNavigate();
 
     const loginHandler = async (values) => {
-        const user = await login(values.username, values.password);
-        authState.changeAuthState(user);
-        navigator('/');
+        try {
+            const user = await login(values.username, values.password);
+            authState.changeAuthState(user);
+            navigator('/');
+        } catch (error) {
+            snackbar.showSnackbar(error.message);
+        }
     }
 
     const { formValues, changeHandler, submitHandler } = useForm(initialValues, loginHandler);

@@ -23,9 +23,19 @@ async function requester(method, url, data) {
         options.body = JSON.stringify(data);
     }
 
-    const response = await fetch(url, options);
+    try {
+        const response = await fetch(url, options);
 
-    return response.json();
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error);
+        }
+
+        return response.json();
+    } catch (error) {
+        throw new Error(error);
+    }
+
 }
 
 export const get = requester.bind(null, 'GET');

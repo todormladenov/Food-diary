@@ -2,6 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import '../Auth.css'
 import { useForm } from "../../../hooks/useForm";
 import { register } from "../../../services/authAPI";
+import { useContext } from "react";
+import { SnackbarContext } from "../../../contexts/SnackbarContext";
 
 const initialValues = {
     username: '',
@@ -11,10 +13,19 @@ const initialValues = {
 
 export default function Register() {
     const navigator = useNavigate();
+    const snackbar = useContext(SnackbarContext);
 
     const registerHandler = async (values) => {
-        await register(values.username, values.password);
-        navigator('/auth/login');
+        try {
+            if (values.password !== values.rePassword) {
+                throw new Error('Passwords must match');
+            }
+
+            await register(values.username, values.password);
+            navigator('/auth/login');
+        } catch (error) {
+            snackbar.showSnackbar(error.message);
+        }
     }
 
     const { formValues, changeHandler, submitHandler } = useForm(initialValues, registerHandler);
