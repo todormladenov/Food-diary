@@ -13,6 +13,10 @@ export const useAddFood = (food, dateId, mealType) => {
     };
 
     const addFood = async (foodValues) => {
+        if (foodValues.servings <= 0) {
+            throw new Error('Servings should be a positive number');
+        }
+
         const diary = await getOneDiaryDateById(dateId);
 
         if (!diary[mealType]) {
