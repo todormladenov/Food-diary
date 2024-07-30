@@ -1,20 +1,27 @@
 import { Link, useParams } from "react-router-dom";
 import './AddFoodSection.css';
 import { useForm } from "../../hooks/useForm";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { searchFoodsByName } from "../../services/foodAPI";
 import SearchFoodResult from "./search-food-result/SearchFoodResult";
+import { SnackbarContext } from "../../contexts/SnackbarContext";
 
 const initialValues = { name: '' }
 
 export default function AddFoodSection() {
     const { mealType, dateId } = useParams();
     const [foods, setFoods] = useState([]);
+    const snackbar = useContext(SnackbarContext);
 
     const searchFoodHandler = async (values) => {
-        const foodsResult = await searchFoodsByName(values);
+        try {
+            const foodsResult = await searchFoodsByName(values);
 
-        setFoods(foodsResult.results);
+            setFoods(foodsResult.results);
+        } catch (error) {
+            snackbar.showSnackbar(error.message);
+        }
+
     }
 
     const { formValues, changeHandler, submitHandler } = useForm(initialValues, searchFoodHandler);
@@ -27,7 +34,11 @@ export default function AddFoodSection() {
             <form className="search-form" onSubmit={submitHandler}>
                 <div className="form-row">
                     <label htmlFor="name">Food Name</label>
-                    <input id="name" name="name" type="text" placeholder="eg. Rice" value={formValues.name} onChange={changeHandler} />
+                    <input id="name" name="name" type="text" placeholder="eg. Rice"
+                        value={formValues.name}
+                        onChange={changeHandler}
+                        required
+                    />
                 </div>
 
                 <button type="submit">Search</button>
