@@ -2,6 +2,8 @@ import { useForm } from '../../hooks/useForm';
 import './CaloriesCalculator.css'
 import NutritionGoal from './nutrition-goal/NutritionGoal';
 import { useNutritionGoal } from '../../hooks/useNutritionGoal';
+import { useContext } from 'react';
+import { SnackbarContext } from '../../contexts/SnackbarContext';
 
 const initialValues = {
     weight: 82,
@@ -13,9 +15,14 @@ const initialValues = {
 
 export default function CaloriesCalculator() {
     const { isShown, nutritionGoal, changeNutritionGoal } = useNutritionGoal();
+    const snackbar = useContext(SnackbarContext);
 
     const calculateCaloriesHandler = (values) => {
-        changeNutritionGoal(values);
+        try {
+            changeNutritionGoal(values);
+        } catch (error) {
+            snackbar.showSnackbar(error.message);
+        }
     }
 
     const { formValues, changeHandler, submitHandler } = useForm(initialValues, calculateCaloriesHandler);
@@ -27,24 +34,39 @@ export default function CaloriesCalculator() {
                     <h3 className='headers'>Calculate your calories</h3>
                     <div className="form-row">
                         <label htmlFor="weight">Weight</label>
-                        <input type="number" id="weight" name="weight" placeholder='82' value={formValues.weight} onChange={changeHandler} />
+                        <input type="number" id="weight" name="weight" placeholder='82'
+                            value={formValues.weight}
+                            onChange={changeHandler}
+                            required
+                            min={1}
+                        />
                         <span className='unit'>kg</span>
                     </div>
 
                     <div className="form-row">
                         <label htmlFor="height">Height</label>
-                        <input type="number" id="height" name="height" placeholder='180' value={formValues.height} onChange={changeHandler} />
+                        <input type="number" id="height" name="height" placeholder='180'
+                            value={formValues.height}
+                            onChange={changeHandler}
+                            required
+                            min={1}
+                        />
                         <span className='unit'>cm</span>
                     </div>
 
                     <div className="form-row">
                         <label htmlFor="age">Age</label>
-                        <input type="number" id="age" name="age" placeholder='24' value={formValues.age} onChange={changeHandler} />
+                        <input type="number" id="age" name="age" placeholder='24'
+                            value={formValues.age}
+                            onChange={changeHandler}
+                            required
+                            min={1}
+                        />
                     </div>
 
                     <div className="form-row">
                         <label htmlFor="activity">Activity Level</label>
-                        <select name="activity" value={formValues.activity} onChange={changeHandler}>
+                        <select name="activity" value={formValues.activity} onChange={changeHandler} required>
                             <option value="little">Little: No activity</option>
                             <option value="lite">Lite: Exercise 1-3 times per week</option>
                             <option value="moderate">Moderate: Exercise 4-5 times per week</option>
@@ -54,7 +76,7 @@ export default function CaloriesCalculator() {
 
                     <div className="form-row">
                         <label htmlFor="goal">Goal</label>
-                        <select name="goal" value={formValues.goal} onChange={changeHandler}>
+                        <select name="goal" value={formValues.goal} onChange={changeHandler} required>
                             <option value="maintain">Maintain weight</option>
                             <option value="loss">Weight loss</option>
                             <option value="gain">Weight gain</option>
