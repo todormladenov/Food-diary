@@ -1,16 +1,32 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { updateUserNutritionGoal } from '../../../services/userAPI';
 import './NutritionGoal.css'
 import { AuthContext } from '../../../contexts/AuthContext';
+import { SnackbarContext } from '../../../contexts/SnackbarContext';
+import SharedLoader from '../../shared/shared-loader/SharedLoader';
 
 export default function NutritionGoal({ nutritionGoal }) {
     const authContext = useContext(AuthContext);
+    const snackbar = useContext(SnackbarContext);
+    const [isLoading, setIsLoading] = useState(false);
 
     const updateNutritionGoal = async () => {
-        await updateUserNutritionGoal(authContext.userId, { nutritionGoal })
+        setIsLoading(true);
+        
+        try {
+            await updateUserNutritionGoal(authContext.userId, { nutritionGoal })
+        } catch (error) {
+            snackbar.showSnackbar(error.message);
+        } finally {
+            setIsLoading(false);
+        }
     }
     return (
         <div className="result">
+            {isLoading
+                &&
+                <SharedLoader />
+            }
             <h3 className='headers'>Daily Nutrition Goals</h3>
 
             <div className="result-row">
