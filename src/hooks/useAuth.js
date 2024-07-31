@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export const useAuth = () => {
     const [authState, setAuthState] = useState({});
+    const [isAuthenticating, setIsAuthenticating] = useState(true);
     const navigator = useNavigate();
 
     const changeAuthState = (state) => {
@@ -21,7 +22,6 @@ export const useAuth = () => {
         const res = await logout();
         changeAuthState({});
         navigator('/auth/login');
-        console.log(res);
     }
 
     useEffect(() => {
@@ -34,12 +34,14 @@ export const useAuth = () => {
 
             const user = await authUser();
             changeAuthState(user);
+            setIsAuthenticating(false);
         })()
     }, []);
 
     return {
         authState,
         changeAuthState,
-        logoutUser
+        logoutUser,
+        isAuthenticating
     }
 }

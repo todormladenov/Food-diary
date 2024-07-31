@@ -10,7 +10,7 @@ export const AuthContext = createContext({
 });
 
 export function AuthContextProvider(props) {
-    const { authState, changeAuthState, logoutUser } = useAuth();
+    const { authState, changeAuthState, logoutUser, isAuthenticating } = useAuth();
 
     const contextData = {
         username: authState?.username,
@@ -23,7 +23,7 @@ export function AuthContextProvider(props) {
 
     return (
         <AuthContext.Provider value={contextData}>
-            {props.children}
+            {!isAuthenticating && props.children}
         </AuthContext.Provider>
     )
 }
