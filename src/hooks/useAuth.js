@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { clearSessionToken, getSessionToken, setSessionToken } from "../utils/sessionTokenManagement";
 import { authUser, logout } from "../services/authAPI";
 import { useNavigate } from "react-router-dom";
+import { SnackbarContext } from "../contexts/SnackbarContext";
 
 export const useAuth = () => {
     const [authState, setAuthState] = useState({});
     const [isAuthenticating, setIsAuthenticating] = useState(true);
+    const snackbar = useContext(SnackbarContext);
+
     const navigator = useNavigate();
 
     const changeAuthState = (state) => {
@@ -19,9 +22,14 @@ export const useAuth = () => {
     }
 
     const logoutUser = async () => {
-        const res = await logout();
-        changeAuthState({});
-        navigator('/auth/login');
+        try {
+            await logout();
+        } catch (error) {
+            snackbar.showSnackbar(error.message);
+        } finally {
+            changeAuthState({});
+            navigator('/auth/login');
+        }
     }
 
     useEffect(() => {
@@ -29,12 +37,20 @@ export const useAuth = () => {
             const sessionToken = getSessionToken();
 
             if (!sessionToken) {
-                return authState;
+                setIsAuthenticating(false);
+                return
             }
 
-            const user = await authUser();
-            changeAuthState(user);
-            setIsAuthenticating(false);
+            try {
+                const user = await authUser();
+                changeAuthState(user);
+            } catch (error) {
+                clearSessionToken();
+                navigator('/auth/login');
+            } finally {
+                setIsAuthenticating(false);
+            }
+
         })()
     }, []);
 
