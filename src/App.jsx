@@ -9,6 +9,7 @@ import { Routes, Route } from 'react-router-dom';
 import { AuthContextProvider } from './contexts/AuthContext';
 import Snackbar from './components/snackbar/Snackbar';
 import { SnackbarProvider } from './contexts/SnackbarContext';
+import Home from './components/home/Home';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
 
           <div className="wrapper">
             <Routes>
+              <Route path='/' element={<Home />} />
               <Route path='/auth/login' element={<Login />} />
               <Route path='/auth/register' element={<Register />} />
               <Route path='/diary/:diaryDate' element={<DiarySection />} />

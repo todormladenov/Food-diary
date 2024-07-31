@@ -1,0 +1,51 @@
+.home-section{
+    padding: 2em;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 3em;
+}
+
+.hero h1 {
+    font-size: 3em;
+    color: #42509e;
+    margin-bottom: 0.5em;
+}
+
+.hero p {
+    font-size: 1.2em;
+    color: #555;
+}
+
+.content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 2em;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 1em;
+    padding: 2em;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card h2 {
+    font-size: 1.8em;
+    color: #07ad90;
+    margin-bottom: 0.5em;
+}
+
+.card p {
+    font-size: 1em;
+    color: #555;
+}
