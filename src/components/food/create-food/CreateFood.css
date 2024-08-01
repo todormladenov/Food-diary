@@ -1,0 +1,45 @@
+.create-food-form {
+    max-width: 500px;
+    background: #E3EDDA;
+    border-radius: 1em;
+    padding: 0 1em 1em 1em;
+    margin: 5em auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.create-food-form .form-row {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+}
+
+.create-food-form .form-row input[type="text"],
+.create-food-form .form-row input[type="number"] {
+    margin-top: 0.5em;
+    line-height: 2;
+    border: 1px solid #ccc;
+    outline: none;
+    border-radius: 0.3em;
+    padding-left: 0.5em;
+}
+
+.create-food-form .form-row input[type="text"]:focus,
+.create-food-form .form-row input[type="number"]:focus {
+    border-color: #07ad90;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.create-food-form button {
+    border: none;
+    background: #07ad90;
+    color: white;
+    padding: 1em 1.5em;
+    margin: 0 auto;
+    border-radius: 0.3em;
+    transition: ease-in 0.2s;
+}
+
+.create-food-form button:hover {
+    background: #025a4b;
+    cursor: pointer;
+}

@@ -10,6 +10,7 @@ import { AuthContextProvider } from './contexts/AuthContext';
 import Snackbar from './components/snackbar/Snackbar';
 import { SnackbarProvider } from './contexts/SnackbarContext';
 import Home from './components/home/Home';
+import CreateFood from './components/food/create-food/CreateFood';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
               <Route path='/diary/:diaryDate' element={<DiarySection />} />
               <Route path='/add-food/:mealType/:dateId' element={<AddFoodSection />} />
               <Route path='/calories-calculator' element={<CaloriesCalculator />} />
+              <Route path='/create-food' element={<CreateFood />} />
             </Routes>
           </div>
 
