@@ -13,21 +13,7 @@ export const calculateCalories = (values) => {
         loss: -500,
         gain: 300
     };
-    
-    if (!weight || weight <= 0 || isNaN(weight)) {
-        throw new Error('Invalid weight')
-    }
-    if (!height || height <= 0 || isNaN(height)) {
-        throw new Error('Invalid height')
-    }
-    if (!age || age <= 0 || isNaN(age)) {
-        throw new Error('Invalid age')
-    }
-    
-    if (!activityMultipliers[activity] || !goalAdjustments[goal]) {
-        throw new Error('Invalid data')
-    }    
-    
+
     const BMR = 10 * weight + 6.25 * height - 5 * age + 5;
 
     const dailyCalories = (BMR * activityMultipliers[activity]) + goalAdjustments[goal];

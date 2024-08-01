@@ -2,8 +2,8 @@ import { useForm } from '../../hooks/useForm';
 import './CaloriesCalculator.css'
 import NutritionGoal from './nutrition-goal/NutritionGoal';
 import { useNutritionGoal } from '../../hooks/useNutritionGoal';
-import { useContext } from 'react';
-import { SnackbarContext } from '../../contexts/SnackbarContext';
+import { useState } from 'react';
+import { validateCalculatorInput } from './validateCalculatorInput';
 
 const initialValues = {
     weight: 82,
@@ -15,14 +15,16 @@ const initialValues = {
 
 export default function CaloriesCalculator() {
     const { isShown, nutritionGoal, changeNutritionGoal } = useNutritionGoal();
-    const snackbar = useContext(SnackbarContext);
+    const [errors, setErrors] = useState({});
 
     const calculateCaloriesHandler = (values) => {
-        try {
-            changeNutritionGoal(values);
-        } catch (error) {
-            snackbar.showSnackbar(error.message);
+        const errors = validateCalculatorInput(values);
+        if (errors) {
+            return setErrors(errors);
+
         }
+
+        changeNutritionGoal(values);
     }
 
     const { formValues, changeHandler, submitHandler } = useForm(initialValues, calculateCaloriesHandler);
@@ -37,10 +39,9 @@ export default function CaloriesCalculator() {
                         <input type="number" id="weight" name="weight" placeholder='82'
                             value={formValues.weight}
                             onChange={changeHandler}
-                            required
-                            min={1}
                         />
                         <span className='unit'>kg</span>
+                        {errors.weight && < p className="error">{errors.weight}</p>}
                     </div>
 
                     <div className="form-row">
@@ -48,10 +49,9 @@ export default function CaloriesCalculator() {
                         <input type="number" id="height" name="height" placeholder='180'
                             value={formValues.height}
                             onChange={changeHandler}
-                            required
-                            min={1}
                         />
                         <span className='unit'>cm</span>
+                        {errors.height && < p className="error">{errors.height}</p>}
                     </div>
 
                     <div className="form-row">
@@ -59,9 +59,8 @@ export default function CaloriesCalculator() {
                         <input type="number" id="age" name="age" placeholder='24'
                             value={formValues.age}
                             onChange={changeHandler}
-                            required
-                            min={1}
                         />
+                        {errors.age && < p className="error">{errors.age}</p>}
                     </div>
 
                     <div className="form-row">
@@ -72,6 +71,7 @@ export default function CaloriesCalculator() {
                             <option value="moderate">Moderate: Exercise 4-5 times per week</option>
                             <option value="active">Active: Exercise daily</option>
                         </select>
+                        {errors.activity && < p className="error">{errors.activity}</p>}
                     </div>
 
                     <div className="form-row">
@@ -81,16 +81,17 @@ export default function CaloriesCalculator() {
                             <option value="loss">Weight loss</option>
                             <option value="gain">Weight gain</option>
                         </select>
+                        {errors.goal && < p className="error">{errors.goal}</p>}
                     </div>
 
                     <div className="form-row">
                         <button type="submit">Calculate</button>
                     </div>
-                </form>
+                </form >
                 {isShown &&
                     <NutritionGoal nutritionGoal={nutritionGoal} />
                 }
-            </div>
+            </div >
         </>
     );
 }
