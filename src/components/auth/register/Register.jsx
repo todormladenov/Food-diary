@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import '../Auth.css'
 import { useForm } from "../../../hooks/useForm";
 import { register } from "../../../services/authAPI";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { SnackbarContext } from "../../../contexts/SnackbarContext";
 
 const initialValues = {
@@ -12,15 +12,17 @@ const initialValues = {
 }
 
 export default function Register() {
+    const [errors, setErrors] = useState({ message: '' });
+
     const navigator = useNavigate();
     const snackbar = useContext(SnackbarContext);
 
     const registerHandler = async (values) => {
-        try {
-            if (values.password !== values.rePassword) {
-                throw new Error('Passwords must match');
-            }
+        if (values.password !== values.rePassword) {
+            return setErrors({ message: 'Passwords must match' });
+        }
 
+        try {
             await register(values.username, values.password);
             navigator('/auth/login');
         } catch (error) {
@@ -59,6 +61,7 @@ export default function Register() {
                     onChange={changeHandler}
                     required
                 />
+                {errors.message && <p className="error">{errors.message}</p>}
                 <label htmlFor="rePassword">Repeat Password</label>
             </div>
 
