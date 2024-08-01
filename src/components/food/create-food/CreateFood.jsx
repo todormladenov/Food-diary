@@ -5,6 +5,7 @@ import './CreateFood.css'
 import { AuthContext } from '../../../contexts/AuthContext';
 import { SnackbarContext } from '../../../contexts/SnackbarContext';
 import { validateCreateFoodInput } from './validateCreateFoodInput';
+import SharedLoader from '../../shared/shared-loader/SharedLoader';
 
 const initialFoodValues = {
     protein: '',
@@ -17,6 +18,7 @@ const initialFoodValues = {
 
 export default function CreateFood() {
     const [errors, setErrors] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
 
     const authState = useContext(AuthContext);
     const snackbar = useContext(SnackbarContext);
@@ -28,9 +30,12 @@ export default function CreateFood() {
             return setErrors(errors);
         }
         try {
+            setIsLoading(true);
             await createFood(values, authState.userId);
         } catch (error) {
             snackbar.showSnackbar(error.message);
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -38,6 +43,8 @@ export default function CreateFood() {
     return (
         <form className="create-food-form" onSubmit={submitHandler}>
             <h3 className='headers'>Create Food</h3>
+            {isLoading && <SharedLoader />}
+
             <div className="form-row">
                 <label htmlFor="name">Food Name</label>
                 <input type="text" id="name" name="name" placeholder='Banana' value={formValues.name} onChange={changeHandler} />

@@ -4,6 +4,7 @@ import { useForm } from "../../../hooks/useForm";
 import { register } from "../../../services/authAPI";
 import { useContext, useState } from "react";
 import { SnackbarContext } from "../../../contexts/SnackbarContext";
+import SharedLoader from "../../shared/shared-loader/SharedLoader";
 
 const initialValues = {
     username: '',
@@ -13,6 +14,7 @@ const initialValues = {
 
 export default function Register() {
     const [errors, setErrors] = useState({ message: '' });
+    const [isLoading, setIsLoading] = useState(false);
 
     const navigator = useNavigate();
     const snackbar = useContext(SnackbarContext);
@@ -23,10 +25,13 @@ export default function Register() {
         }
 
         try {
+            setIsLoading(true);
             await register(values.username, values.password);
             navigator('/auth/login');
         } catch (error) {
             snackbar.showSnackbar(error.message);
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -34,7 +39,7 @@ export default function Register() {
     return (
         <form className="form" onSubmit={submitHandler}>
             <h2>Register</h2>
-
+            {isLoading && <SharedLoader />}
             <div className="field-wrapper">
                 <input type="text" id="username" name="username" placeholder='Username' autoComplete="on"
                     value={formValues.username}

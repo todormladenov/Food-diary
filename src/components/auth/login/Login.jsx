@@ -5,6 +5,7 @@ import { useForm } from '../../../hooks/useForm';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { SnackbarContext } from '../../../contexts/SnackbarContext';
+import SharedLoader from '../../shared/shared-loader/SharedLoader';
 
 const initialValues = {
     username: '',
@@ -13,6 +14,7 @@ const initialValues = {
 
 export default function Login() {
     const [errors, setErrors] = useState({ message: '' });
+    const [isLoading, setIsLoading] = useState(false);
 
     const authState = useContext(AuthContext);
     const snackbar = useContext(SnackbarContext);
@@ -24,17 +26,22 @@ export default function Login() {
         }
 
         try {
+            setIsLoading(true);
             const user = await login(values.username, values.password);
             authState.changeAuthState(user);
             navigator('/');
         } catch (error) {
             snackbar.showSnackbar(error.message);
+        } finally {
+            setIsLoading(false);
         }
     }
 
     const { formValues, changeHandler, submitHandler } = useForm(initialValues, loginHandler);
     return (
         <form className="form" onSubmit={submitHandler}>
+            {isLoading && <SharedLoader />}
+
             <h2>Login</h2>
             {errors.message && <p className='error'>{errors.message}</p>}
             <div className="field-wrapper">
