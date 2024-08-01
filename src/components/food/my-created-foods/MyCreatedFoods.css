@@ -1,0 +1,91 @@
+.catalog-section {
+    padding: 2em;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 3em;
+}
+
+.hero h1 {
+    font-size: 3em;
+    color: #42509e;
+    margin-bottom: 0.5em;
+}
+
+.hero p {
+    font-size: 1.2em;
+    color: #555;
+}
+
+.food-container {
+    display: flex;
+    gap: 2em;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.food-card {
+    background: white;
+    border-radius: 1em;
+    max-width: 250px;
+    padding: 1em;
+    transition: transform 0.3s;
+}
+
+.food-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: scale(1.05);
+}
+
+.food-card h2 {
+    font-size: 1.8em;
+    color: #07ad90;
+    margin-bottom: 0.5em;
+}
+
+.food-card p {
+    font-size: 1em;
+    color: #555;
+    font-size: 18px;
+}
+
+.food-card span {
+    font-weight: bold;
+}
+
+.food-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1em;
+}
+
+.edit-button,
+.delete-button {
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 0.3em;
+    cursor: pointer;
+    transition:
+        background-color 0.3s box-shadow 0.3s;
+}
+
+.edit-button {
+    background-color: #07ad90;
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #025a4b;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+}
+
+.delete-button {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #c0392b;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+}

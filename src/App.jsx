@@ -13,6 +13,7 @@ import Home from './components/home/Home';
 import CreateFood from './components/food/create-food/CreateFood';
 import AuthenticatedView from './components/route-guards/AuthenticatedView';
 import GuestView from './components/route-guards/GuestView';
+import MyCreatedFoods from './components/food/my-created-foods/MyCreatedFoods';
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
                 <Route path='/diary/:diaryDate' element={<DiarySection />} />
                 <Route path='/add-food/:mealType/:dateId' element={<AddFoodSection />} />
                 <Route path='/create-food' element={<CreateFood />} />
+                <Route path='/my-created-foods' element={<MyCreatedFoods />} />
               </Route>
 
             </Routes>

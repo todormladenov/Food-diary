@@ -29,6 +29,9 @@ export default function Header() {
                                 <li>
                                     <Link className="link" to="/create-food">CREATE FOOD</Link>
                                 </li>
+                                <li>
+                                    <Link className="link" to="/my-created-foods">MY CREATED FOODS</Link>
+                                </li>
                             </>)
                             :
                             (<>
