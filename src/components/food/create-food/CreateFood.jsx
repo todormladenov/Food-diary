@@ -6,6 +6,7 @@ import { AuthContext } from '../../../contexts/AuthContext';
 import { SnackbarContext } from '../../../contexts/SnackbarContext';
 import { validateCreateFoodInput } from './validateCreateFoodInput';
 import SharedLoader from '../../shared/shared-loader/SharedLoader';
+import { useNavigate } from 'react-router-dom';
 
 const initialFoodValues = {
     protein: '',
@@ -19,6 +20,7 @@ const initialFoodValues = {
 export default function CreateFood() {
     const [errors, setErrors] = useState({});
     const [isLoading, setIsLoading] = useState(false);
+    const navigator = useNavigate();
 
     const authState = useContext(AuthContext);
     const snackbar = useContext(SnackbarContext);
@@ -29,9 +31,11 @@ export default function CreateFood() {
         if (errors) {
             return setErrors(errors);
         }
+
         try {
             setIsLoading(true);
             await createFood(values, authState.userId);
+            navigator('/my-created-foods');
         } catch (error) {
             snackbar.showSnackbar(error.message);
         } finally {
