@@ -9,7 +9,7 @@ function foodsReducer(state, action) {
         case 'GET_ALL':
             return action.foods;
         case 'DELETE_ONE':
-            return action.filter(food => food.ojectId !== action.ojectIdToDelete);
+            return action.foods.filter(food => food.objectId !== action.foodId);
         default:
             return state;
     }
@@ -34,8 +34,8 @@ export const useGetFoods = () => {
         })()
     }, []);
 
-    const changeFoods = (type) => {
-        dispatch({ type, foods });
+    const changeFoods = (type, foodId) => {
+        dispatch({ type: type, foods, foodId });
     }
 
     return {

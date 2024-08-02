@@ -1,5 +1,5 @@
 import createPointer from "../utils/createPointer";
-import { get, post } from "./api";
+import { del, get, post } from "./api";
 
 const baseUrl = 'https://parseapi.back4app.com/classes/Food';
 
@@ -31,7 +31,7 @@ export const createFood = (foodData, ownerId) => {
 
 export const getUsersCreatedFoods = (ownerId) => {
     const pointer = createPointer('_User', ownerId);
-    
+
     const constraintsString = JSON.stringify({ ownerId: pointer });
     const query = encodeURIComponent(constraintsString);
 
@@ -39,3 +39,5 @@ export const getUsersCreatedFoods = (ownerId) => {
 
     return get(url);
 }
+
+export const deleteFoodById = (foodId) => del(`${baseUrl}/${foodId}`);

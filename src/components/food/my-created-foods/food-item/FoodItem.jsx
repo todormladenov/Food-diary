@@ -1,4 +1,4 @@
-export default function FoodItem({ food }) {
+export default function FoodItem({ food, onDelete }) {
     return (
         <div className="food-card">
             <h2>{food.name}</h2>
@@ -11,7 +11,7 @@ export default function FoodItem({ food }) {
                 <button className="edit-button" >
                     <i className="fa-solid fa-pen-to-square"></i>
                 </button>
-                <button className="delete-button" >
+                <button className="delete-button" onClick={() => onDelete(food.objectId)} >
                     <i className="fa-solid fa-trash"></i>
                 </button>
             </div>
