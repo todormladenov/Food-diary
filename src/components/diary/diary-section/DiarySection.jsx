@@ -9,7 +9,7 @@ import { useDiary } from "../../../hooks/useDiary";
 
 export default function DiarySection() {
     const { diaryDate } = useParams();
-    const { diary } = useDiary();
+    const { diary, deleteFoodFromDiary } = useDiary();
 
     return (
         <>
@@ -30,21 +30,25 @@ export default function DiarySection() {
                         <DiaryBreakfast
                             dateId={diary.objectId}
                             breakfast={diary.breakfast || []}
+                            onDelete={deleteFoodFromDiary}
                         />
 
                         <DiaryLunch
                             dateId={diary.objectId}
                             lunch={diary.lunch || []}
+                            onDelete={deleteFoodFromDiary}
                         />
 
                         <DiaryDinner
                             dateId={diary.objectId}
                             dinner={diary.dinner || []}
+                            onDelete={deleteFoodFromDiary}
                         />
 
                         <DiarySnack
                             dateId={diary.objectId}
                             snack={diary.snack || []}
+                            onDelete={deleteFoodFromDiary}
                         />
 
                     </tbody>

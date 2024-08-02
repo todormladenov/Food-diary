@@ -1,4 +1,4 @@
-export default function DiaryMealFoodRow({ food }) {
+export default function DiaryMealFoodRow({ food, mealType, index, onDelete }) {
     return (
         <tr>
             <td className="first">{food.name} | {food.servings} servings</td>
@@ -6,7 +6,11 @@ export default function DiaryMealFoodRow({ food }) {
             <td>{food.carbs}</td>
             <td>{food.fat}</td>
             <td>{food.protein}</td>
-            <td>Remove</td>
+            <td className="remove">
+                <button className="delete-button" onClick={() => onDelete(mealType, index)} >
+                    <i className="fa-solid fa-trash"></i>
+                </button>
+            </td>
         </tr>
     );
 }

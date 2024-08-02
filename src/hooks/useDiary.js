@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
-import { createDiaryDate, getOneDiaryDate } from "../services/dateAPI";
+import { createDiaryDate, getOneDiaryDate, updateDiaryDateById } from "../services/dateAPI";
 import { SnackbarContext } from "../contexts/SnackbarContext";
 
 export const useDiary = () => {
@@ -39,7 +39,22 @@ export const useDiary = () => {
         }
     }
 
+    const deleteFoodFromDiary = async (mealType, indexToDelete) => {
+        const updatedDiary = {
+            ...diary,
+            [mealType]: diary[mealType].filter((food, foodIndex) => foodIndex !== indexToDelete)
+        }
+
+        try {
+            await updateDiaryDateById(diary.objectId, { [mealType]: updatedDiary[mealType] });
+            setDiary(updatedDiary)
+        } catch (error) {
+            snackbar.showSnackbar(error.message);
+        }
+    }
+
     return {
-        diary
+        diary,
+        deleteFoodFromDiary
     }
 }
