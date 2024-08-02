@@ -1,6 +1,13 @@
 import './MyCreatedFoods.css'
+import { useContext } from 'react';
+import { AuthContext } from '../../../contexts/AuthContext';
+import { useGetFoods } from '../../../hooks/useGetFoods';
+import FoodItem from './food-item/FoodItem';
 
 export default function MyCreatedFoods() {
+    const { userId } = useContext(AuthContext);
+    const { foods, changeFoods } = useGetFoods();
+
     return (
         <div className='catalog-section'>
             <section className="hero">
@@ -8,196 +15,7 @@ export default function MyCreatedFoods() {
                 <p>Manage your custom foods and track their nutritional value.</p>
             </section>
             <div className="food-container">
-
-                <section className="food-content">
-                    <div className="food-card">
-                        <h2>Some food</h2>
-                        <p><span>Calories:</span> 300</p>
-                        <p><span>Protein:</span> 14</p>
-                        <p><span>Carbs:</span> 30</p>
-                        <p><span>Fat:</span> 2</p>
-                        <p><span>Serving Size:</span> 100 grams</p>
-                        <div className="food-buttons">
-                            <button className="edit-button" >
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                            <button className="delete-button" >
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="food-content">
-                    <div className="food-card">
-                        <h2>Some food</h2>
-                        <p><span>Calories:</span> 300</p>
-                        <p><span>Protein:</span> 14</p>
-                        <p><span>Carbs:</span> 30</p>
-                        <p><span>Fat:</span> 2</p>
-                        <p><span>Serving Size:</span> 100 grams</p>
-                        <div className="food-buttons">
-                            <button className="edit-button" >
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                            <button className="delete-button" >
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="food-content">
-                    <div className="food-card">
-                        <h2>Some food</h2>
-                        <p><span>Calories:</span> 300</p>
-                        <p><span>Protein:</span> 14</p>
-                        <p><span>Carbs:</span> 30</p>
-                        <p><span>Fat:</span> 2</p>
-                        <p><span>Serving Size:</span> 100 grams</p>
-                        <div className="food-buttons">
-                            <button className="edit-button" >
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                            <button className="delete-button" >
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="food-content">
-                    <div className="food-card">
-                        <h2>Some food</h2>
-                        <p><span>Calories:</span> 300</p>
-                        <p><span>Protein:</span> 14</p>
-                        <p><span>Carbs:</span> 30</p>
-                        <p><span>Fat:</span> 2</p>
-                        <p><span>Serving Size:</span> 100 grams</p>
-                        <div className="food-buttons">
-                            <button className="edit-button" >
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                            <button className="delete-button" >
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="food-content">
-                    <div className="food-card">
-                        <h2>Some food</h2>
-                        <p><span>Calories:</span> 300</p>
-                        <p><span>Protein:</span> 14</p>
-                        <p><span>Carbs:</span> 30</p>
-                        <p><span>Fat:</span> 2</p>
-                        <p><span>Serving Size:</span> 100 grams</p>
-                        <div className="food-buttons">
-                            <button className="edit-button" >
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                            <button className="delete-button" >
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="food-content">
-                    <div className="food-card">
-                        <h2>Some food</h2>
-                        <p><span>Calories:</span> 300</p>
-                        <p><span>Protein:</span> 14</p>
-                        <p><span>Carbs:</span> 30</p>
-                        <p><span>Fat:</span> 2</p>
-                        <p><span>Serving Size:</span> 100 grams</p>
-                        <div className="food-buttons">
-                            <button className="edit-button" >
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                            <button className="delete-button" >
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="food-content">
-                    <div className="food-card">
-                        <h2>Some food</h2>
-                        <p><span>Calories:</span> 300</p>
-                        <p><span>Protein:</span> 14</p>
-                        <p><span>Carbs:</span> 30</p>
-                        <p><span>Fat:</span> 2</p>
-                        <p><span>Serving Size:</span> 100 grams</p>
-                        <div className="food-buttons">
-                            <button className="edit-button" >
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                            <button className="delete-button" >
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="food-content">
-                    <div className="food-card">
-                        <h2>Some food</h2>
-                        <p><span>Calories:</span> 300</p>
-                        <p><span>Protein:</span> 14</p>
-                        <p><span>Carbs:</span> 30</p>
-                        <p><span>Fat:</span> 2</p>
-                        <p><span>Serving Size:</span> 100 grams</p>
-                        <div className="food-buttons">
-                            <button className="edit-button" >
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                            <button className="delete-button" >
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="food-content">
-                    <div className="food-card">
-                        <h2>Some food</h2>
-                        <p><span>Calories:</span> 300</p>
-                        <p><span>Protein:</span> 14</p>
-                        <p><span>Carbs:</span> 30</p>
-                        <p><span>Fat:</span> 2</p>
-                        <p><span>Serving Size:</span> 100 grams</p>
-                        <div className="food-buttons">
-                            <button className="edit-button" >
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                            <button className="delete-button" >
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="food-content">
-                    <div className="food-card">
-                        <h2>Some food</h2>
-                        <p><span>Calories:</span> 300</p>
-                        <p><span>Protein:</span> 14</p>
-                        <p><span>Carbs:</span> 30</p>
-                        <p><span>Fat:</span> 2</p>
-                        <p><span>Serving Size:</span> 100 grams</p>
-                        <div className="food-buttons">
-                            <button className="edit-button" >
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                            <button className="delete-button" >
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </section>
+                {foods.map(food => <FoodItem key={food.objectId} food={food} />)}
             </div>
         </div>
     );

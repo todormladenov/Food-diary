@@ -18,7 +18,7 @@ export const createFood = (foodData, ownerId) => {
     const pointer = createPointer('_User', ownerId);
 
     const body = {
-        ownerId: pointer, 
+        ownerId: pointer,
         name: foodData.name,
         protein: Number(foodData.protein),
         carbs: Number(foodData.carbs),
@@ -27,4 +27,15 @@ export const createFood = (foodData, ownerId) => {
         servingSize: foodData.servingSize,
     };
     return post(baseUrl, body);
-} 
+}
+
+export const getUsersCreatedFoods = (ownerId) => {
+    const pointer = createPointer('_User', ownerId);
+    
+    const constraintsString = JSON.stringify({ ownerId: pointer });
+    const query = encodeURIComponent(constraintsString);
+
+    const url = baseUrl + '?where=' + query;
+
+    return get(url);
+}
