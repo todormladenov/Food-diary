@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function FoodItem({ food, onDelete }) {
     return (
         <div className="food-card">
@@ -8,9 +10,9 @@ export default function FoodItem({ food, onDelete }) {
             <p><span>Fat:</span> {food.fat}</p>
             <p><span>Serving Size:</span> {food.servingSize}</p>
             <div className="food-buttons">
-                <button className="edit-button" >
+                <Link to={`/edit-food/${food.objectId}`} className="edit-button">
                     <i className="fa-solid fa-pen-to-square"></i>
-                </button>
+                </Link>
                 <button className="delete-button" onClick={() => onDelete(food.objectId)} >
                     <i className="fa-solid fa-trash"></i>
                 </button>

@@ -1,5 +1,5 @@
 import createPointer from "../utils/createPointer";
-import { del, get, post } from "./api";
+import { del, get, post, put } from "./api";
 
 const baseUrl = 'https://parseapi.back4app.com/classes/Food';
 
@@ -41,3 +41,18 @@ export const getUsersCreatedFoods = (ownerId) => {
 }
 
 export const deleteFoodById = (foodId) => del(`${baseUrl}/${foodId}`);
+
+export const getFoodById = (foodId) => get(`${baseUrl}/${foodId}`);
+
+export const editFood = (foodId, foodData) => {
+    const body = {
+        name: foodData.name,
+        protein: Number(foodData.protein),
+        carbs: Number(foodData.carbs),
+        fat: Number(foodData.fat),
+        calories: Number(foodData.calories),
+        servingSize: foodData.servingSize,
+    };
+    
+    return put(`${baseUrl}/${foodId}`, body);
+} 
