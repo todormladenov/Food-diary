@@ -2,16 +2,28 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/3d-old-text-2-1-1024x1024.png';
 import './Header.css';
 import { getTodayDate } from '../../utils/get-dates';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
+import Goals from './Goals/Goals';
 
 export default function Header() {
+    const [isShown, setIsShown] = useState(false);
     const todayDate = getTodayDate();
     const authContext = useContext(AuthContext);
 
+    const showGoal = () => {
+        setIsShown(true);
+    }
+
+    const hideGoal = () => {
+        setIsShown(false);
+    }
+
     return (
         <>
+
             <div className="header">
+                {isShown && <Goals nutritionGoal={authContext?.nutritionGoal} onHide={hideGoal} />}
                 <div className="logo">
                     <img src={logo} alt="Food Diary" />
                 </div>
@@ -24,7 +36,7 @@ export default function Header() {
                             ?
                             (<>
                                 <li>
-                                    <Link className="link active" to={`/diary/${todayDate}`} >DIARY</Link>
+                                    <Link className="link" to={`/diary/${todayDate}`} >DIARY</Link>
                                 </li>
                                 <li>
                                     <Link className="link" to="/create-food">CREATE FOOD</Link>
@@ -52,7 +64,7 @@ export default function Header() {
                     &&
                     (<div className="user-info">
                         <span>Hi, {authContext.username}</span>
-                        <span>Goals</span>
+                        <span onClick={showGoal}>Goals</span>
                         <span onClick={authContext.logoutUser}>Logout</span>
                     </div>)
                 }
