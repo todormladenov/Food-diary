@@ -23,7 +23,7 @@ export default function Home() {
                 <h1>Welcome to Shape Up</h1>
                 <p>Your ultimate fitness and nutrition tracker.</p>
             </section>
-            <section className="content">
+            <section className="home-content">
                 <div className="card" onClick={() => navigateTo(`/diary/${todayDate}`)}>
                     <h2>Track Your Progress</h2>
                     <p>Keep a detailed diary of your fitness journey.</p>
