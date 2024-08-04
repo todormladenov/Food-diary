@@ -5,7 +5,7 @@ export default function NutritionInfo({ food, onHideNutritionInfo }) {
         <div className="overlay">
             <div className="backdrop" onClick={onHideNutritionInfo}></div>
             <div className="modal">
-                <div className="content">
+                <div className="modal-content">
                     <header className="headers">
                         <h2>Nutrition Information</h2>
                         <button className="close-btn" onClick={onHideNutritionInfo}>

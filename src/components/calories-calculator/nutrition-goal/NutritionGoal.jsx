@@ -12,9 +12,10 @@ export default function NutritionGoal({ nutritionGoal }) {
 
     const updateNutritionGoal = async () => {
         setIsLoading(true);
-        
+
         try {
-            await updateUserNutritionGoal(authContext.userId, { nutritionGoal })
+            await updateUserNutritionGoal(authContext.userId, { nutritionGoal });
+            authContext.changeAuthState({ ...authContext, nutritionGoal });
         } catch (error) {
             snackbar.showSnackbar(error.message);
         } finally {

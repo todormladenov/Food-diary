@@ -17,6 +17,7 @@ export function AuthContextProvider(props) {
         sessionToken: authState?.sessionToken,
         isAuth: !!authState?.sessionToken,
         userId: authState?.objectId,
+        nutritionGoal: authState?.nutritionGoal,
         changeAuthState,
         logoutUser
     }
