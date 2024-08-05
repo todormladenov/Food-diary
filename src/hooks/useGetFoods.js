@@ -1,4 +1,4 @@
-import { useContext, useEffect, useReducer } from "react"
+import { useContext, useEffect, useReducer, useState } from "react"
 import { getUsersCreatedFoods } from "../services/foodAPI";
 import { AuthContext } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -17,22 +17,28 @@ function foodsReducer(state, action) {
 
 export const useGetFoods = () => {
     const [foods, dispatch] = useReducer(foodsReducer, []);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
     const navigator = useNavigate();
 
     const { userId } = useContext(AuthContext);
     const snackbar = useContext(SnackbarContext);
 
+    const ITEMS_PER_PAGE = 3;
+
     useEffect(() => {
         (async () => {
             try {
-                const foods = await getUsersCreatedFoods(userId);
-                dispatch({ type: 'GET_ALL', foods: foods.results });
+                const skip = (currentPage - 1) * ITEMS_PER_PAGE;
+                const { results, count } = await getUsersCreatedFoods(userId, ITEMS_PER_PAGE, skip);
+                dispatch({ type: 'GET_ALL', foods: results });
+                setTotalPages(Math.ceil(count / ITEMS_PER_PAGE));
             } catch (error) {
                 navigator('/');
                 snackbar.showSnackbar(error.message);
             }
         })()
-    }, []);
+    }, [currentPage]);
 
     const changeFoods = (type, foodId) => {
         dispatch({ type: type, foodId });
@@ -40,6 +46,9 @@ export const useGetFoods = () => {
 
     return {
         foods,
-        changeFoods
+        changeFoods,
+        currentPage,
+        setCurrentPage,
+        totalPages,
     }
 }
