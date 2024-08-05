@@ -18,7 +18,7 @@ export const useAuth = () => {
             clearSessionToken();
         }
 
-        setAuthState(state);
+        setAuthState(oldState => ({ ...oldState, ...state }));
     }
 
     const logoutUser = async () => {
