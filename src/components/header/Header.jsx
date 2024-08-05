@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import logo from '../../assets/3d-old-text-2-1-1024x1024.png';
 import './Header.css';
 import { getTodayDate } from '../../utils/get-dates';
@@ -8,6 +8,7 @@ import Goals from './Goals/Goals';
 
 export default function Header() {
     const [isShown, setIsShown] = useState(false);
+    const location = useLocation();
     const todayDate = getTodayDate();
     const authContext = useContext(AuthContext);
 
@@ -30,33 +31,33 @@ export default function Header() {
                 <div className="nav">
                     <ul>
                         <li>
-                            <Link className="link" to='/'>HOME</Link>
+                            <Link className={`link ${location.pathname === '/' && 'active'}`} to='/'>HOME</Link>
                         </li>
                         {authContext.isAuth
                             ?
                             (<>
                                 <li>
-                                    <Link className="link" to={`/diary/${todayDate}`} >DIARY</Link>
+                                    <Link className={`link ${location.pathname.includes('/diary') && 'active'}`} to={`/diary/${todayDate}`} >DIARY</Link>
                                 </li>
                                 <li>
-                                    <Link className="link" to="/create-food">CREATE FOOD</Link>
+                                    <Link className={`link ${location.pathname === '/create-food' && 'active'}`} to="/create-food">CREATE FOOD</Link>
                                 </li>
                                 <li>
-                                    <Link className="link" to="/my-created-foods">MY CREATED FOODS</Link>
+                                    <Link className={`link ${location.pathname === '/my-created-foods' && 'active'}`} to="/my-created-foods">MY CREATED FOODS</Link>
                                 </li>
                             </>)
                             :
                             (<>
                                 <li>
-                                    <Link className="link" to='/auth/login' >LOGIN</Link>
+                                    <Link className={`link ${location.pathname === '/auth/login' && 'active'}`} to='/auth/login' >LOGIN</Link>
                                 </li>
                                 <li>
-                                    <Link className="link" to="/auth/register">REGISTER</Link>
+                                    <Link className={`link ${location.pathname === '/auth/register' && 'active'}`} to="/auth/register">REGISTER</Link>
                                 </li>
                             </>)
                         }
                         <li>
-                            <Link className="link" to="/calories-calculator">CALORIES CALCULATOR</Link>
+                            <Link className={`link ${location.pathname === '/calories-calculator' && 'active'}`} to="/calories-calculator">CALORIES CALCULATOR</Link>
                         </li>
                     </ul>
                 </div>
