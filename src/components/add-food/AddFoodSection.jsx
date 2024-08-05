@@ -11,6 +11,7 @@ const initialValues = { name: '' }
 export default function AddFoodSection() {
     const { mealType, dateId } = useParams();
     const [foods, setFoods] = useState([]);
+    const [hasSearched, setHasSearched] = useState(false);
     const snackbar = useContext(SnackbarContext);
 
     const searchFoodHandler = async (values) => {
@@ -18,6 +19,7 @@ export default function AddFoodSection() {
             const foodsResult = await searchFoodsByName(values);
 
             setFoods(foodsResult.results);
+            setHasSearched(true);
         } catch (error) {
             snackbar.showSnackbar(error.message);
         }
@@ -45,12 +47,13 @@ export default function AddFoodSection() {
 
             </form>
 
-            {
-                foods.map(food =>
-                    <SearchFoodResult
-                        key={food.objectId}
-                        food={food}
-                    />)
+            {hasSearched && foods.length === 0 && <p className="no-results-message">No Results Found</p>}
+
+            {foods.map(food =>
+                <SearchFoodResult
+                    key={food.objectId}
+                    food={food}
+                />)
             }
 
             <div className="meal-type">
@@ -62,12 +65,6 @@ export default function AddFoodSection() {
                 <Link to='/create-food'>
                     <button className="btn-create" type="submit">
                         Create Food
-                    </button>
-                </Link>
-
-                <Link>
-                    <button className="btn-go-back" type="button">
-                        Go Back To Diary
                     </button>
                 </Link>
             </div>
