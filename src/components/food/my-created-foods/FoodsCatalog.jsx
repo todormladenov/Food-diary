@@ -1,11 +1,11 @@
-import './MyCreatedFoods.css'
+import './FoodsCatalog.css'
 import { useContext } from 'react';
 import { useGetFoods } from '../../../hooks/useGetFoods';
 import FoodItem from './food-item/FoodItem';
 import { deleteFoodById } from '../../../services/foodAPI';
 import { SnackbarContext } from '../../../contexts/SnackbarContext';
 
-export default function MyCreatedFoods() {
+export default function FoodsCatalog() {
     const { foods, changeFoods, currentPage, setCurrentPage, totalPages, } = useGetFoods();
     const snackbar = useContext(SnackbarContext);
 

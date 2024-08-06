@@ -1,6 +1,5 @@
 import { useContext, useEffect, useReducer, useState } from "react"
-import { getUsersCreatedFoods } from "../services/foodAPI";
-import { AuthContext } from "../contexts/AuthContext";
+import { getCreatedFoods } from "../services/foodAPI";
 import { useNavigate } from "react-router-dom";
 import { SnackbarContext } from "../contexts/SnackbarContext";
 
@@ -21,7 +20,6 @@ export const useGetFoods = () => {
     const [totalPages, setTotalPages] = useState(1);
     const navigator = useNavigate();
 
-    const { userId } = useContext(AuthContext);
     const snackbar = useContext(SnackbarContext);
 
     const ITEMS_PER_PAGE = 3;
@@ -30,7 +28,7 @@ export const useGetFoods = () => {
         (async () => {
             try {
                 const skip = (currentPage - 1) * ITEMS_PER_PAGE;
-                const { results, count } = await getUsersCreatedFoods(userId, ITEMS_PER_PAGE, skip);
+                const { results, count } = await getCreatedFoods(ITEMS_PER_PAGE, skip);
                 dispatch({ type: 'GET_ALL', foods: results });
                 setTotalPages(Math.ceil(count / ITEMS_PER_PAGE));
             } catch (error) {

@@ -10,10 +10,6 @@ export default function Home() {
     const todayDate = getTodayDate();
 
     const navigateTo = (path) => {
-        if (!authState.isAuth && path != '/calories-calculator') {
-            return navigator('/auth/login');
-        }
-
         navigator(path);
     }
 
@@ -35,6 +31,10 @@ export default function Home() {
                 <div className="card" onClick={() => navigateTo('/calories-calculator')}>
                     <h2>Calculate Your Calories</h2>
                     <p>Use our calculator to manage your daily intake.</p>
+                </div>
+                <div className="card" onClick={() => navigateTo('/foods-catalog')}>
+                    <h2>Brows Our Foods Catalog</h2>
+                    <p>Have a look on our foods section and add them yo your meals</p>
                 </div>
             </section>
         </div>

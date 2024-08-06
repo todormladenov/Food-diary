@@ -29,13 +29,8 @@ export const createFood = (foodData, ownerId) => {
     return post(baseUrl, body);
 }
 
-export const getUsersCreatedFoods = (ownerId, limit, skip) => {
-    const pointer = createPointer('_User', ownerId);
-
-    const constraintsString = JSON.stringify({ ownerId: pointer });
-    const query = encodeURIComponent(constraintsString);
-
-    const url = baseUrl + '?where=' + query + `&limit=${limit}&skip=${skip}&count=1`;
+export const getCreatedFoods = (limit, skip) => {
+    const url = baseUrl + `?limit=${limit}&skip=${skip}&count=1`;
 
     return get(url);
 }

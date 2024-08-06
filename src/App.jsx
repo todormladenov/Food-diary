@@ -13,8 +13,8 @@ import Home from './components/home/Home';
 import CreateFood from './components/food/create-food/CreateFood';
 import AuthenticatedView from './components/route-guards/AuthenticatedView';
 import GuestView from './components/route-guards/GuestView';
-import MyCreatedFoods from './components/food/my-created-foods/MyCreatedFoods';
 import EditFood from './components/food/edit-food/EditFood';
+import FoodsCatalog from './components/food/my-created-foods/FoodsCatalog';
 
 function App() {
 
@@ -30,6 +30,7 @@ function App() {
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/calories-calculator' element={<CaloriesCalculator />} />
+              <Route path='/foods-catalog' element={<FoodsCatalog />} />
 
               <Route element={<GuestView />}>
                 <Route path='/auth/login' element={<Login />} />
@@ -40,7 +41,6 @@ function App() {
                 <Route path='/diary/:diaryDate' element={<DiarySection />} />
                 <Route path='/add-food/:mealType/:dateId' element={<AddFoodSection />} />
                 <Route path='/create-food' element={<CreateFood />} />
-                <Route path='/my-created-foods' element={<MyCreatedFoods />} />
                 <Route path='/edit-food/:foodId' element={<EditFood />} />
               </Route>
 

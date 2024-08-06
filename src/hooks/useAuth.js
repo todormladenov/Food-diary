@@ -16,6 +16,8 @@ export const useAuth = () => {
             setSessionToken(state.sessionToken)
         } else {
             clearSessionToken();
+            setAuthState({});
+            return
         }
 
         setAuthState(oldState => ({ ...oldState, ...state }));

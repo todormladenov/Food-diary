@@ -35,7 +35,7 @@ export default function EditFood() {
         try {
             setIsLoading(true);
             await editFood(foodId, values);
-            navigator('/my-created-foods');
+            navigator('/foods-catalog');
         } catch (error) {
             snackbar(error.message);
         } finally { 
@@ -86,7 +86,7 @@ export default function EditFood() {
             </div>
 
             <div className="form-row">
-                <button type="submit">Create</button>
+                <button type="submit">Edit</button>
             </div>
         </form >
     );

@@ -35,7 +35,7 @@ export default function CreateFood() {
         try {
             setIsLoading(true);
             await createFood(values, authState.userId);
-            navigator('/my-created-foods');
+            navigator('/foods-catalog');
         } catch (error) {
             snackbar.showSnackbar(error.message);
         } finally {
