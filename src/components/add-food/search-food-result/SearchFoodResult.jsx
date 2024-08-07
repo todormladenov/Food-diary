@@ -45,7 +45,6 @@ export default function SearchFoodResult({ food }) {
                     <input type="number" name="servings" id="servings"
                         value={formValues.servings}
                         onChange={changeHandler}
-                        required
                     />
                     <p>Serving Size {food.servingSize}</p>
                     <button type="button" className="btn" onClick={showNutritionInfo}>Nutrition value</button>

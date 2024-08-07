@@ -11,10 +11,17 @@ const initialValues = { name: '' }
 export default function AddFoodSection() {
     const { mealType, dateId } = useParams();
     const [foods, setFoods] = useState([]);
+    const [errors, setErrors] = useState({});
     const [hasSearched, setHasSearched] = useState(false);
     const snackbar = useContext(SnackbarContext);
 
     const searchFoodHandler = async (values) => {
+        if (!values.name.trim()) {
+            return setErrors({ message: 'Food name is required' })
+        } else {
+            setErrors({});
+        }
+
         try {
             const foodsResult = await searchFoodsByName(values);
 
@@ -39,13 +46,13 @@ export default function AddFoodSection() {
                     <input id="name" name="name" type="text" placeholder="eg. Rice"
                         value={formValues.name}
                         onChange={changeHandler}
-                        required
                     />
                 </div>
 
                 <button type="submit">Search</button>
 
             </form>
+            {errors.message && <p className="error">{errors.message}</p>}
 
             {hasSearched && foods.length === 0 && <p className="no-results-message">No Results Found</p>}
 

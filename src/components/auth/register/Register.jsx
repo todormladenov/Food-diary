@@ -5,6 +5,7 @@ import { register } from "../../../services/authAPI";
 import { useContext, useState } from "react";
 import { SnackbarContext } from "../../../contexts/SnackbarContext";
 import SharedLoader from "../../shared/shared-loader/SharedLoader";
+import { validateRegisterInput } from "./validateRegisterInput";
 
 const initialValues = {
     username: '',
@@ -13,15 +14,17 @@ const initialValues = {
 }
 
 export default function Register() {
-    const [errors, setErrors] = useState({ message: '' });
+    const [errors, setErrors] = useState({});
     const [isLoading, setIsLoading] = useState(false);
 
     const navigator = useNavigate();
     const snackbar = useContext(SnackbarContext);
 
     const registerHandler = async (values) => {
-        if (values.password !== values.rePassword) {
-            return setErrors({ message: 'Passwords must match' });
+        const errors = validateRegisterInput(values);
+
+        if (errors) {
+            return setErrors(errors);
         }
 
         try {
@@ -44,9 +47,8 @@ export default function Register() {
                 <input type="text" id="username" name="username" placeholder='Username' autoComplete="on"
                     value={formValues.username}
                     onChange={changeHandler}
-                    required
-                    minLength={4}
                 />
+                {errors.username && <p className='error'>{errors.username}</p>}
                 <label htmlFor="username">Username</label>
             </div>
 
@@ -54,9 +56,8 @@ export default function Register() {
                 <input type="password" id="password" name="password" placeholder='Password' autoComplete="on"
                     value={formValues.password}
                     onChange={changeHandler}
-                    required
-                    minLength={8}
                 />
+                {errors.password && <p className='error'>{errors.password}</p>}
                 <label htmlFor="password">Password</label>
             </div>
 
@@ -64,9 +65,8 @@ export default function Register() {
                 <input type="password" id="rePassword" name="rePassword" placeholder='Repeat Password' autoComplete="on"
                     value={formValues.rePassword}
                     onChange={changeHandler}
-                    required
                 />
-                {errors.message && <p className="error">{errors.message}</p>}
+                {errors.rePassword && <p className="error">{errors.rePassword}</p>}
                 <label htmlFor="rePassword">Repeat Password</label>
             </div>
 
