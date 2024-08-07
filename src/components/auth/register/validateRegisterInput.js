@@ -4,7 +4,7 @@ export const validateRegisterInput = (values) => {
     const errors = {};
 
     if (!username.trim() || username.trim().length < 4) {
-        errors.username = 'Username should be at least 2 symbols';
+        errors.username = 'Username should be at least 4 symbols';
     }
 
     if (!password.trim() || password.trim().length < 8) {
