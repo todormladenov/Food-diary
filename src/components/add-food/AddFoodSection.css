@@ -9,6 +9,7 @@
     gap: 0.5em;
     align-items: stretch;
     flex-wrap: wrap;
+    margin: 1em auto;
 }
 
 .search-form .form-row {
@@ -25,6 +26,12 @@
     border-radius: 0.3em;
     padding: 0.3em;
     margin-top: 0.3em;
+}
+
+.search-form .form-row input:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
 }
 
 .search-form button {
@@ -92,7 +99,7 @@
 .no-results-message {
     padding: 1em;
     margin-top: 1em;
-    color: #ff5751; /* A noticeable color */
+    color: #ff5751;
     background-color: #f9f9f9;
     border: 1px solid #ff5751;
     border-radius: 0.3em;

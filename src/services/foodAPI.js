@@ -14,6 +14,17 @@ export const searchFoodsByName = (values) => {
     return get(url)
 }
 
+export const searchFoodsByCategory = (category) => {
+    const constraints = { category };
+
+    const constraintsString = JSON.stringify(constraints);
+    const query = encodeURIComponent(constraintsString);
+
+    const url = baseUrl + '?where=' + query;
+
+    return get(url);
+}
+
 export const createFood = (foodData, ownerId) => {
     const pointer = createPointer('_User', ownerId);
 

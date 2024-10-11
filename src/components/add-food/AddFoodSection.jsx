@@ -2,9 +2,10 @@ import { Link, useParams } from "react-router-dom";
 import './AddFoodSection.css';
 import { useForm } from "../../hooks/useForm";
 import { useContext, useState } from "react";
-import { searchFoodsByName } from "../../services/foodAPI";
+import { searchFoodsByCategory, searchFoodsByName } from "../../services/foodAPI";
 import SearchFoodResult from "./search-food-result/SearchFoodResult";
 import { SnackbarContext } from "../../contexts/SnackbarContext";
+import CategorySelector from "../shared/category-selector/CategorySelector";
 
 const initialValues = { name: '' }
 
@@ -33,12 +34,25 @@ export default function AddFoodSection() {
 
     }
 
+    const handleSearchFoodsByCategory = async (category) => {
+        setErrors({});
+        
+        try {
+            const foods = await searchFoodsByCategory(category);
+            setFoods(foods.results);            
+        } catch (error) {
+            setErrors({ message: 'Something went wrong, please try again.' });
+        }
+    }
+
     const { formValues, changeHandler, submitHandler } = useForm(initialValues, searchFoodHandler);
     return (
         <>
             <header className="headers">
                 <h2>Add Food</h2>
             </header>
+
+            <CategorySelector onSearch={handleSearchFoodsByCategory} />
 
             <form className="search-form" onSubmit={submitHandler}>
                 <div className="form-row">
@@ -70,7 +84,7 @@ export default function AddFoodSection() {
 
             <div className="action-btns">
                 <Link to='/create-food'>
-                    <button className="btn-create" type="submit">
+                    <button className="btn-create">
                         Create Food
                     </button>
                 </Link>
