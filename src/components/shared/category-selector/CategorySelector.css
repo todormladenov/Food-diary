@@ -1,0 +1,40 @@
+.category-selector {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.category-selector:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+.category-selector option {
+    padding: 10px;
+    background-color: #fff;
+    color: #333;
+}
+
+.category-selector option[value=""] {
+    color: #999;
+    font-style: italic;
+}
+
+.category-selector-label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: inline-block;
+    color: #333;
+}
+
+.category-selector-label+.category-selector {
+    margin-top: 5px;
+}
