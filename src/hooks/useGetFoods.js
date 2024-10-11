@@ -33,7 +33,7 @@ export const useGetFoods = () => {
                 const { results, count } = searchQuery
                     ? await searchFoods(searchQuery, ITEMS_PER_PAGE, skip)
                     : await getCreatedFoods(ITEMS_PER_PAGE, skip);
-
+                                                                        
                 dispatch({ type: 'GET_ALL', foods: results });
                 setTotalPages(Math.ceil(count / ITEMS_PER_PAGE));
             } catch (error) {
@@ -49,6 +49,7 @@ export const useGetFoods = () => {
 
     const changeSearchQuery = (query) => {
         setSearchQuery(oldQuery => ({ ...oldQuery, ...query }));
+        setCurrentPage(1);
     }
 
     return {

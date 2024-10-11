@@ -1,20 +1,19 @@
 import { Link, useParams } from "react-router-dom";
 import './AddFoodSection.css';
 import { useForm } from "../../hooks/useForm";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import SearchFoodResult from "./search-food-result/SearchFoodResult";
-import { SnackbarContext } from "../../contexts/SnackbarContext";
 import CategorySelector from "../shared/category-selector/CategorySelector";
 import { useGetFoods } from "../../hooks/useGetFoods";
+import Paginator from "../shared/paginator/Paginator";
 
 const initialValues = { name: '' }
 
 export default function AddFoodSection() {
-    const { mealType, dateId } = useParams();
+    const { mealType } = useParams();
     const { foods, currentPage, setCurrentPage, totalPages, changeSearchQuery } = useGetFoods();
     const [errors, setErrors] = useState({});
     const [hasSearched, setHasSearched] = useState(false);
-    const snackbar = useContext(SnackbarContext);
 
     const searchFoodHandler = async (values) => {
         if (!values.name.trim()) {
@@ -63,6 +62,12 @@ export default function AddFoodSection() {
                     food={food}
                 />)
             }
+
+            <Paginator
+                currentPage={currentPage}
+                totalPages={totalPages}
+                setCurrentPage={setCurrentPage}
+            />
 
             <div className="meal-type">
                 <h5>Meal Type:</h5>

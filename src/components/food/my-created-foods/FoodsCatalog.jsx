@@ -4,11 +4,11 @@ import { useGetFoods } from '../../../hooks/useGetFoods';
 import FoodItem from './food-item/FoodItem';
 import { deleteFoodById } from '../../../services/foodAPI';
 import { SnackbarContext } from '../../../contexts/SnackbarContext';
+import Paginator from '../../shared/paginator/Paginator';
 
 export default function FoodsCatalog() {
     const { foods, changeFoods, currentPage, setCurrentPage, totalPages, } = useGetFoods();
     const snackbar = useContext(SnackbarContext);
-
 
     const deleteHandler = async (foodId) => {
         try {
@@ -16,19 +16,6 @@ export default function FoodsCatalog() {
             changeFoods('DELETE_ONE', foodId);
         } catch (error) {
             snackbar.showSnackbar(error.message);
-        }
-    }
-
-    const handlePreviousPage = () => {
-        if (currentPage > 1) {
-            setCurrentPage(currentPage - 1);
-        }
-    }
-
-
-    const handleNextPage = () => {
-        if (currentPage < totalPages) {
-            setCurrentPage(currentPage + 1);
         }
     }
 
@@ -42,14 +29,11 @@ export default function FoodsCatalog() {
                 {foods.map(food => <FoodItem key={food.objectId} food={food} onDelete={deleteHandler} />)}
             </div>
 
-            <div className="pagination">
-                <button onClick={handlePreviousPage} disabled={currentPage === 1}>
-                    <i className="fa-solid fa-angle-left"></i>
-                </button>
-                <button onClick={handleNextPage} disabled={currentPage === totalPages}>
-                    <i className="fa-solid fa-angle-right"></i>
-                </button>
-            </div>
+            <Paginator
+                currentPage={currentPage}
+                totalPages={totalPages}
+                setCurrentPage={setCurrentPage}
+            />
         </div>
     );
 }
