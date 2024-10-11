@@ -10,6 +10,10 @@ export const useForm = (initialValues, submitCallback) => {
         }));
     }
 
+    const resetFormValues = () => {
+        setFormValues(initialValues);
+    }
+
     const submitHandler = (e) => {
         e.preventDefault();
 
@@ -19,6 +23,7 @@ export const useForm = (initialValues, submitCallback) => {
     return {
         formValues,
         changeHandler,
-        submitHandler
+        submitHandler,
+        resetFormValues
     }
 }
