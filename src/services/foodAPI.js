@@ -3,26 +3,23 @@ import { del, get, post, put } from "./api";
 
 const baseUrl = 'https://parseapi.back4app.com/classes/Food';
 
-export const searchFoodsByName = (values) => {
-    const constraints = { 'name': { '$regex': values.name } }
+export const searchFoods = ({ name, category }, limit, skip) => {
+    const constraints = {}
+
+    if (name) {
+        constraints['name'] = { '$regex': name }
+    }
+
+    if (category) {
+        constraints['category'] = category
+    }
 
     const constraintsString = JSON.stringify(constraints);
     const query = encodeURIComponent(constraintsString);
 
-    const url = baseUrl + '?where=' + query;
+    const url = baseUrl + '?where=' + query + `&limit=${limit}&skip=${skip}&count=1`;
 
     return get(url)
-}
-
-export const searchFoodsByCategory = (category) => {
-    const constraints = { category };
-
-    const constraintsString = JSON.stringify(constraints);
-    const query = encodeURIComponent(constraintsString);
-
-    const url = baseUrl + '?where=' + query;
-
-    return get(url);
 }
 
 export const createFood = (foodData, ownerId) => {
