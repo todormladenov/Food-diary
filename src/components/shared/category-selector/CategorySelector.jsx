@@ -4,7 +4,7 @@ import { useState } from "react";
 export default function CategorySelector({ onSearch }) {
     const [selectedCategory, setSelectedCategory] = useState("");
 
-    const handleCategoryChange = async (e) => {
+    const handleCategoryChange = (e) => {
         const category = e.target.value;
         setSelectedCategory(category);
 

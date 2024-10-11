@@ -2,16 +2,16 @@ import { Link, useParams } from "react-router-dom";
 import './AddFoodSection.css';
 import { useForm } from "../../hooks/useForm";
 import { useContext, useState } from "react";
-import { searchFoodsByCategory, searchFoodsByName } from "../../services/foodAPI";
 import SearchFoodResult from "./search-food-result/SearchFoodResult";
 import { SnackbarContext } from "../../contexts/SnackbarContext";
 import CategorySelector from "../shared/category-selector/CategorySelector";
+import { useGetFoods } from "../../hooks/useGetFoods";
 
 const initialValues = { name: '' }
 
 export default function AddFoodSection() {
     const { mealType, dateId } = useParams();
-    const [foods, setFoods] = useState([]);
+    const { foods, currentPage, setCurrentPage, totalPages, changeSearchQuery } = useGetFoods();
     const [errors, setErrors] = useState({});
     const [hasSearched, setHasSearched] = useState(false);
     const snackbar = useContext(SnackbarContext);
@@ -23,29 +23,16 @@ export default function AddFoodSection() {
             setErrors({});
         }
 
-        try {
-            const foodsResult = await searchFoodsByName(values);
-
-            setFoods(foodsResult.results);
-            setHasSearched(true);
-        } catch (error) {
-            snackbar.showSnackbar(error.message);
-        }
-
+        changeSearchQuery({ name: values.name });
+        setHasSearched(true);
     }
 
-    const handleSearchFoodsByCategory = async (category) => {
-        setErrors({});
-        
-        try {
-            const foods = await searchFoodsByCategory(category);
-            setFoods(foods.results);            
-        } catch (error) {
-            setErrors({ message: 'Something went wrong, please try again.' });
-        }
+    const handleSearchFoodsByCategory = (category) => {
+        resetFormValues();
+        changeSearchQuery({ category, name: '' });
     }
 
-    const { formValues, changeHandler, submitHandler } = useForm(initialValues, searchFoodHandler);
+    const { formValues, changeHandler, submitHandler, resetFormValues } = useForm(initialValues, searchFoodHandler);
     return (
         <>
             <header className="headers">
