@@ -20,13 +20,14 @@
 .modal-content {
     width: 100%;
     height: auto;
-    position: absolute;
-    margin: 7em auto;
+    position: fixed; /* Changed from absolute to fixed */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    left: 0;
     border-radius: 0.75em;
     background-color: white;
     padding: 1em;
     z-index: 30;
-    left: 0;
     animation: fadeIn 0.3s ease-out;
 }
 

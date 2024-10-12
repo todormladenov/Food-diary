@@ -10,7 +10,6 @@
 .hero h1 {
     font-size: 3em;
     color: #42509e;
-    margin-bottom: 0.5em;
 }
 
 .hero p {
@@ -23,12 +22,13 @@
     gap: 2em;
     flex-wrap: wrap;
     justify-content: center;
+    margin-top: 3em;
 }
 
 .food-card {
     background: white;
+    flex: 0 1 250px;
     border-radius: 1em;
-    max-width: 250px;
     padding: 1em;
     transition: transform 0.3s;
 }
@@ -48,6 +48,7 @@
     font-size: 1em;
     color: #555;
     font-size: 18px;
+    
 }
 
 .food-card span {
@@ -88,39 +89,4 @@
 .delete-button:hover {
     background-color: #c0392b;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
-}
-
-.pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1em;
-    margin-top: 2em;
-}
-
-.pagination button {
-    border: none;
-    background: #07ad90;
-    color: white;
-    padding: 0.5em 1em;
-    border-radius: 0.3em;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-}
-
-.pagination button:hover {
-    background: #025a4b;
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.pagination button:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-}
-
-.pagination i {
-    font-size: 1.2em;
 }
