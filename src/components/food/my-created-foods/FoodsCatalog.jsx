@@ -6,9 +6,10 @@ import { deleteFoodById } from '../../../services/foodAPI';
 import { SnackbarContext } from '../../../contexts/SnackbarContext';
 import Paginator from '../../shared/paginator/Paginator';
 import CategorySelector from '../../shared/category-selector/CategorySelector';
+import Spinner from '../../shared/spinner/Spinner';
 
 export default function FoodsCatalog() {
-    const { foods, changeFoods, currentPage, setCurrentPage, totalPages, changeSearchQuery } = useGetFoods();
+    const { foods, changeFoods, currentPage, setCurrentPage, totalPages, changeSearchQuery, isLoading } = useGetFoods();
     const snackbar = useContext(SnackbarContext);
 
     const deleteHandler = async (foodId) => {
@@ -34,14 +35,19 @@ export default function FoodsCatalog() {
             <CategorySelector onSearch={handleSearchFoodsByCategory} />
 
             <div className="food-container">
-                {foods.map(food => <FoodItem key={food.objectId} food={food} onDelete={deleteHandler} />)}
+                {isLoading
+                    ? <Spinner />
+                    : foods.map(food => <FoodItem key={food.objectId} food={food} onDelete={deleteHandler} />)
+                }
             </div>
+
 
             <Paginator
                 currentPage={currentPage}
                 totalPages={totalPages}
                 setCurrentPage={setCurrentPage}
             />
+
         </div>
     );
 }

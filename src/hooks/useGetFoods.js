@@ -19,6 +19,7 @@ export const useGetFoods = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [searchQuery, setSearchQuery] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
     const navigator = useNavigate();
 
     const snackbar = useContext(SnackbarContext);
@@ -28,6 +29,7 @@ export const useGetFoods = () => {
     useEffect(() => {
         (async () => {
             try {
+                setIsLoading(true);
                 const skip = (currentPage - 1) * ITEMS_PER_PAGE;
 
                 const { results, count } = searchQuery
@@ -39,6 +41,8 @@ export const useGetFoods = () => {
             } catch (error) {
                 navigator('/');
                 snackbar.showSnackbar(error.message);
+            } finally {
+                setIsLoading(false);
             }
         })()
     }, [currentPage, searchQuery]);
@@ -58,6 +62,7 @@ export const useGetFoods = () => {
         currentPage,
         setCurrentPage,
         totalPages,
-        changeSearchQuery
+        changeSearchQuery,
+        isLoading
     }
 }
