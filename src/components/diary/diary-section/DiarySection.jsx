@@ -6,53 +6,58 @@ import DiaryLunch from "./diary-lunch/DiaryLunch";
 import DiaryDinner from "./diary-dinner/DiaryDinner";
 import DiarySnack from "./diary-snack/DiarySnack";
 import { useDiary } from "../../../hooks/useDiary";
+import Spinner from "../../shared/spinner/Spinner";
 
 export default function DiarySection() {
     const { diaryDate } = useParams();
-    const { diary, deleteFoodFromDiary } = useDiary();
+    const { diary, deleteFoodFromDiary, isLoading } = useDiary();
 
     return (
         <>
             <DiaryDate diaryDate={diaryDate} />
 
             <section className="food-diary">
-                <table className="diary">
-                    <colgroup>
-                        <col className="col-one" />
-                        <col className="col-two" />
-                        <col className="col-two" />
-                        <col className="col-two" />
-                        <col className="col-two" />
-                        <col className="col-six" />
-                    </colgroup>
-                    <tbody>
 
-                        <DiaryBreakfast
-                            dateId={diary.objectId}
-                            breakfast={diary.breakfast || []}
-                            onDelete={deleteFoodFromDiary}
-                        />
+                {isLoading
+                    ? <Spinner />
+                    : <table className="diary">
+                        <colgroup>
+                            <col className="col-one" />
+                            <col className="col-two" />
+                            <col className="col-two" />
+                            <col className="col-two" />
+                            <col className="col-two" />
+                            <col className="col-six" />
+                        </colgroup>
+                        <tbody>
 
-                        <DiaryLunch
-                            dateId={diary.objectId}
-                            lunch={diary.lunch || []}
-                            onDelete={deleteFoodFromDiary}
-                        />
+                            <DiaryBreakfast
+                                dateId={diary.objectId}
+                                breakfast={diary.breakfast || []}
+                                onDelete={deleteFoodFromDiary}
+                            />
 
-                        <DiaryDinner
-                            dateId={diary.objectId}
-                            dinner={diary.dinner || []}
-                            onDelete={deleteFoodFromDiary}
-                        />
+                            <DiaryLunch
+                                dateId={diary.objectId}
+                                lunch={diary.lunch || []}
+                                onDelete={deleteFoodFromDiary}
+                            />
 
-                        <DiarySnack
-                            dateId={diary.objectId}
-                            snack={diary.snack || []}
-                            onDelete={deleteFoodFromDiary}
-                        />
+                            <DiaryDinner
+                                dateId={diary.objectId}
+                                dinner={diary.dinner || []}
+                                onDelete={deleteFoodFromDiary}
+                            />
 
-                    </tbody>
-                </table>
+                            <DiarySnack
+                                dateId={diary.objectId}
+                                snack={diary.snack || []}
+                                onDelete={deleteFoodFromDiary}
+                            />
+
+                        </tbody>
+                    </table>
+                }
             </section>
         </>
 

@@ -6,12 +6,13 @@ import SearchFoodResult from "./search-food-result/SearchFoodResult";
 import CategorySelector from "../shared/category-selector/CategorySelector";
 import { useGetFoods } from "../../hooks/useGetFoods";
 import Paginator from "../shared/paginator/Paginator";
+import Spinner from "../shared/spinner/Spinner";
 
 const initialValues = { name: '' }
 
 export default function AddFoodSection() {
     const { mealType } = useParams();
-    const { foods, currentPage, setCurrentPage, totalPages, changeSearchQuery } = useGetFoods();
+    const { foods, currentPage, setCurrentPage, totalPages, changeSearchQuery, isLoading } = useGetFoods();
     const [errors, setErrors] = useState({});
     const [hasSearched, setHasSearched] = useState(false);
 
@@ -56,11 +57,13 @@ export default function AddFoodSection() {
 
             {hasSearched && foods.length === 0 && <p className="no-results-message">No Results Found</p>}
 
-            {foods.map(food =>
-                <SearchFoodResult
-                    key={food.objectId}
-                    food={food}
-                />)
+            {isLoading
+                ? <Spinner />
+                : foods.map(food =>
+                    <SearchFoodResult
+                        key={food.objectId}
+                        food={food}
+                    />)
             }
 
             <Paginator

@@ -6,6 +6,7 @@ import { SnackbarContext } from "../contexts/SnackbarContext";
 
 export const useDiary = () => {
     const [diary, setDiary] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
     const { diaryDate } = useParams();
     const { userId } = useContext(AuthContext);
     const snackbar = useContext(SnackbarContext);
@@ -13,6 +14,7 @@ export const useDiary = () => {
     useEffect(() => {
         (async () => {
             try {
+                setIsLoading(true);
                 const result = await getOneDiaryDate(userId, diaryDate);
                 let diary = result.results[0]
 
@@ -23,6 +25,8 @@ export const useDiary = () => {
                 setDiary(diary);
             } catch (error) {
                 snackbar.showSnackbar(error.message);
+            } finally {
+                setIsLoading(false);
             }
         })();
 
@@ -55,6 +59,7 @@ export const useDiary = () => {
 
     return {
         diary,
-        deleteFoodFromDiary
+        deleteFoodFromDiary,
+        isLoading
     }
 }
