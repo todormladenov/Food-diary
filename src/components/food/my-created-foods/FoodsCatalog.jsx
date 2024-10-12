@@ -5,9 +5,10 @@ import FoodItem from './food-item/FoodItem';
 import { deleteFoodById } from '../../../services/foodAPI';
 import { SnackbarContext } from '../../../contexts/SnackbarContext';
 import Paginator from '../../shared/paginator/Paginator';
+import CategorySelector from '../../shared/category-selector/CategorySelector';
 
 export default function FoodsCatalog() {
-    const { foods, changeFoods, currentPage, setCurrentPage, totalPages, } = useGetFoods();
+    const { foods, changeFoods, currentPage, setCurrentPage, totalPages, changeSearchQuery } = useGetFoods();
     const snackbar = useContext(SnackbarContext);
 
     const deleteHandler = async (foodId) => {
@@ -19,12 +20,19 @@ export default function FoodsCatalog() {
         }
     }
 
+    const handleSearchFoodsByCategory = (category) => {
+        changeSearchQuery({ category, name: '' });
+    }
+
     return (
         <div className='catalog-section'>
             <section className="hero">
                 <h1>Your Food Catalog</h1>
                 <p>Manage your custom foods and track their nutritional value.</p>
             </section>
+
+            <CategorySelector onSearch={handleSearchFoodsByCategory} />
+
             <div className="food-container">
                 {foods.map(food => <FoodItem key={food.objectId} food={food} onDelete={deleteHandler} />)}
             </div>
