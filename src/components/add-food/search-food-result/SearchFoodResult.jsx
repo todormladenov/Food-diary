@@ -11,6 +11,7 @@ import { SnackbarContext } from '../../../contexts/SnackbarContext';
 export default function SearchFoodResult({ food }) {
     const { mealType, dateId } = useParams();
     const [isLoading, setIsLoading] = useState(false);
+    const [isAdded, setIsAdded] = useState(false);
     const { isShown, showNutritionInfo, hideNutritionInfo } = useNutritionInfo();
     const { initialFoodValues, addFood } = useAddFood(food, dateId, mealType);
 
@@ -21,6 +22,8 @@ export default function SearchFoodResult({ food }) {
 
         try {
             await addFood(foodValues);
+            setIsAdded(true);
+            setTimeout(() => setIsAdded(false), 5000);
         } catch (error) {
             snackbar.showSnackbar(error.message);
         } finally {
@@ -37,6 +40,13 @@ export default function SearchFoodResult({ food }) {
                 <NutritionInfo food={food} onHideNutritionInfo={hideNutritionInfo} />
             }
             <form className="add-meal-form" onSubmit={submitHandler}>
+
+                {isAdded &&
+                    <div className="success-animation">
+                        <i class="fa-solid fa-check fa-bounce"> {food.name} added !</i>
+                    </div>
+                }
+
                 {isLoading && <SharedLoader />}
                 <div className="food-row">
                     <input type="submit" value='Add' className="btn" />
