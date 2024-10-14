@@ -43,7 +43,7 @@ export default function SearchFoodResult({ food }) {
 
                 {isAdded &&
                     <div className="success-animation">
-                        <i class="fa-solid fa-check fa-bounce"> {food.name} added !</i>
+                        <i class="fa-solid fa-check fa-beat-fade"> {food.name} added !</i>
                     </div>
                 }
 
