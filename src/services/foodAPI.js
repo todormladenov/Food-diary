@@ -7,7 +7,10 @@ export const searchFoods = ({ name, category }, limit, skip) => {
     const constraints = {}
 
     if (name) {
-        constraints['name'] = { '$regex': name }
+        constraints['name'] = {
+            '$regex': name,
+            '$options': 'i'
+        }
     }
 
     if (category) {
