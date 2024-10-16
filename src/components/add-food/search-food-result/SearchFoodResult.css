@@ -54,7 +54,6 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #07ad90;
-    color: white;
     padding: 1em;
     border-radius: 0.3em;
     animation: fadeOut 5s forwards;
