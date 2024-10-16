@@ -51,7 +51,7 @@ export default function SearchFoodResult({ food }) {
                 <div className="food-row">
                     <input type="submit" value='Add' className="btn" />
                     <label>{food.name}</label>
-                    <strong>Servings</strong>
+                    <strong>Grams</strong>
                     <input type="number" name="servings" id="servings"
                         value={formValues.servings}
                         onChange={changeHandler}

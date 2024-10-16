@@ -12,11 +12,11 @@ export function calculateTotalFoodMacros(foodValues) {
 
     return {
         objectId,
-        protein: Math.round(protein * servings),
+        protein: Math.round(protein * (servings / 100)),
         name,
-        calories: Math.round(calories * servings),
-        carbs: Math.round(carbs * servings),
-        fat: Math.round(fat * servings),
+        calories: Math.round(calories * (servings / 100)),
+        carbs: Math.round(carbs * (servings / 100)),
+        fat: Math.round(fat * (servings / 100)),
         servings
     };
 }

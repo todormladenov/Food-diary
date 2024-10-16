@@ -1,7 +1,9 @@
+import SharedLoader from "../../../shared/shared-loader/SharedLoader";
+
 export default function DiaryMealFoodRow({ food, mealType, index, onDelete }) {
     return (
         <tr>
-            <td className="first">{food.name} | {food.servings} servings</td>
+            <td className="first">{food.name} | {food.servings} grams</td>
             <td>{food.calories}</td>
             <td>{food.carbs}</td>
             <td>{food.fat}</td>
