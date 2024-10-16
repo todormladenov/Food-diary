@@ -9,7 +9,7 @@ import CategorySelector from '../../shared/category-selector/CategorySelector';
 import Spinner from '../../shared/spinner/Spinner';
 
 export default function FoodsCatalog() {
-    const { foods, changeFoods, currentPage, setCurrentPage, totalPages, changeSearchQuery, isLoading } = useGetFoods();
+    const { foodsList, isLoading, currentPage, totalPages, changeFoods, setCurrentPage, changeSearchQuery, } = useGetFoods();
     const snackbar = useContext(SnackbarContext);
 
     const deleteHandler = async (foodId) => {
@@ -24,7 +24,7 @@ export default function FoodsCatalog() {
     const handleSearchFoodsByCategory = (category) => {
         changeSearchQuery({ category, name: '' });
     }
-
+    
     return (
         <div className='catalog-section'>
             <section className="hero">
@@ -37,7 +37,7 @@ export default function FoodsCatalog() {
             <div className="food-container">
                 {isLoading
                     ? <Spinner />
-                    : foods.map(food => <FoodItem key={food.objectId} food={food} onDelete={deleteHandler} />)
+                    : foodsList.map(food => <FoodItem key={food.objectId} food={food} onDelete={deleteHandler} />)
                 }
             </div>
 
@@ -46,6 +46,7 @@ export default function FoodsCatalog() {
                 currentPage={currentPage}
                 totalPages={totalPages}
                 setCurrentPage={setCurrentPage}
+                isLoading={isLoading}
             />
 
         </div>

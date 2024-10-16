@@ -6,20 +6,52 @@ import { SnackbarContext } from "../contexts/SnackbarContext";
 function foodsReducer(state, action) {
     switch (action.type) {
         case 'GET_ALL':
-            return action.foods;
+            return {
+                ...state,
+                foods: action.foods
+            }
         case 'DELETE_ONE':
-            return state.filter(food => food.objectId !== action.foodId);
+            return {
+                ...state,
+                foods: state.foods.filter(food => food.objectId !== action.foodId)
+            }
+        case 'SET_LOADING':
+            return {
+                ...state,
+                isLoading: action.isLoading
+            }
+        case 'SET_CURRENT_PAGE':
+            return {
+                ...state,
+                currentPage: action.currentPage
+            }
+        case 'SET_TOTAL_PAGES':
+            return {
+                ...state,
+                totalPages: action.totalPages
+            }
+        case 'SET_SEARCH_QUERY':
+            return {
+                ...state,
+                searchQuery: { ...state.searchQuery, ...action.searchQuery },
+                currentPage: 1
+            }
         default:
             return state;
     }
 }
 
+const initialState = {
+    foods: [],
+    currentPage: 1,
+    totalPages: 1,
+    isLoading: false,
+    error: null,
+    searchQuery: null,
+}
+
 export const useGetFoods = () => {
-    const [foods, dispatch] = useReducer(foodsReducer, []);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-    const [searchQuery, setSearchQuery] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
+    const [foods, dispatch] = useReducer(foodsReducer, initialState);
     const navigator = useNavigate();
 
     const snackbar = useContext(SnackbarContext);
@@ -29,40 +61,45 @@ export const useGetFoods = () => {
     useEffect(() => {
         (async () => {
             try {
-                setIsLoading(true);
-                const skip = (currentPage - 1) * ITEMS_PER_PAGE;
+                dispatch({ type: 'SET_LOADING', isLoading: true });
 
-                const { results, count } = searchQuery
-                    ? await searchFoods(searchQuery, ITEMS_PER_PAGE, skip)
+                const skip = (foods.currentPage - 1) * ITEMS_PER_PAGE;
+
+                const { results, count } = foods.searchQuery
+                    ? await searchFoods(foods.searchQuery, ITEMS_PER_PAGE, skip)
                     : await getCreatedFoods(ITEMS_PER_PAGE, skip);
-                                                                        
-                dispatch({ type: 'GET_ALL', foods: results });
-                setTotalPages(Math.ceil(count / ITEMS_PER_PAGE));
+
+                dispatch({ type: 'GET_ALL', foods: results, });
+                dispatch({ type: 'SET_TOTAL_PAGES', totalPages: Math.ceil(count / ITEMS_PER_PAGE) });
             } catch (error) {
                 navigator('/');
                 snackbar.showSnackbar(error.message);
             } finally {
-                setIsLoading(false);
+                dispatch({ type: 'SET_LOADING', isLoading: false });
             }
         })()
-    }, [currentPage, searchQuery]);
+    }, [foods.currentPage, foods.searchQuery]);
 
     const changeFoods = (type, foodId) => {
         dispatch({ type: type, foodId });
     }
 
-    const changeSearchQuery = (query) => {
-        setSearchQuery(oldQuery => ({ ...oldQuery, ...query }));
+    const changeSearchQuery = (searchQuery) => {
+        dispatch({ type: 'SET_SEARCH_QUERY', searchQuery });
         setCurrentPage(1);
     }
 
+    const setCurrentPage = (page) => {
+        dispatch({ type: 'SET_CURRENT_PAGE', currentPage: page });
+    }
+
     return {
-        foods,
+        foodsList: foods.foods,
+        isLoading: foods.isLoading,
+        currentPage: foods.currentPage,
+        totalPages: foods.totalPages,
         changeFoods,
-        currentPage,
         setCurrentPage,
-        totalPages,
         changeSearchQuery,
-        isLoading
     }
 }

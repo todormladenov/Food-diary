@@ -12,7 +12,7 @@ const initialValues = { name: '' }
 
 export default function AddFoodSection() {
     const { mealType } = useParams();
-    const { foods, currentPage, setCurrentPage, totalPages, changeSearchQuery, isLoading } = useGetFoods();
+    const { foodsList, isLoading, currentPage, totalPages, setCurrentPage, changeSearchQuery } = useGetFoods();
     const [errors, setErrors] = useState({});
     const [hasSearched, setHasSearched] = useState(false);
 
@@ -55,11 +55,11 @@ export default function AddFoodSection() {
             </form>
             {errors.message && <p className="error">{errors.message}</p>}
 
-            {hasSearched && foods.length === 0 && <p className="no-results-message">No Results Found</p>}
+            {hasSearched && foodsList.length === 0 && <p className="no-results-message">No Results Found</p>}
 
             {isLoading
                 ? <Spinner />
-                : foods.map(food =>
+                : foodsList.map(food =>
                     <SearchFoodResult
                         key={food.objectId}
                         food={food}
@@ -70,6 +70,7 @@ export default function AddFoodSection() {
                 currentPage={currentPage}
                 totalPages={totalPages}
                 setCurrentPage={setCurrentPage}
+                isLoading={isLoading}
             />
 
             <div className="meal-type">
