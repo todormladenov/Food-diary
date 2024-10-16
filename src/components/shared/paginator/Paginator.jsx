@@ -1,6 +1,6 @@
 import './Paginator.css';
 
-export default function Paginator({ currentPage, totalPages, setCurrentPage }) {
+export default function Paginator({ currentPage, totalPages, setCurrentPage, isLoading }) {
 
     const handlePreviousPage = () => {
         if (currentPage > 1) {
@@ -16,10 +16,10 @@ export default function Paginator({ currentPage, totalPages, setCurrentPage }) {
 
     return (
         <div className="pagination">
-            <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+            <button onClick={handlePreviousPage} disabled={currentPage === 1 || isLoading}>
                 <i className="fa-solid fa-angle-left"></i>
             </button>
-            <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+            <button onClick={handleNextPage} disabled={currentPage === totalPages || isLoading}>
                 <i className="fa-solid fa-angle-right"></i>
             </button>
         </div>
