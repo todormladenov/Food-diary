@@ -1,5 +1,5 @@
 export const validateCreateFoodInput = (values) => {
-    const { protein, name, calories, carbs, fat, servingSize } = values;
+    const { protein, name, calories, carbs, fat, servingSize, category } = values;
 
     const errors = {};
 
@@ -25,6 +25,10 @@ export const validateCreateFoodInput = (values) => {
 
     if (!servingSize.trim()) {
         errors.servingSize = 'Serving Size is required';
+    }
+
+    if (!category.trim()) {
+        errors.category = 'Category is required';
     }
 
     if (Object.keys(errors).length > 0) {
