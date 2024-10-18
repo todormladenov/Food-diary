@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { SnackbarContext } from "../../../contexts/SnackbarContext";
 import { editFood } from "../../../services/foodAPI";
 import SharedLoader from "../../shared/shared-loader/SharedLoader";
+import CategorySelector from "../../shared/category-selector/CategorySelector";
 
 const initialFoodValues = {
     protein: '',
@@ -13,7 +14,8 @@ const initialFoodValues = {
     calories: '',
     carbs: '',
     fat: '',
-    servingSize: ''
+    servingSize: '',
+    category: ''
 };
 
 export default function EditFood() {
@@ -42,7 +44,8 @@ export default function EditFood() {
             setIsLoading(false);
         }
     }
-
+    console.log(food);
+    
     const { formValues, changeHandler, submitHandler } = useForm(Object.assign(initialFoodValues, food), editHandler);
     return (
         <form className="create-food-form" onSubmit={submitHandler}>
@@ -83,6 +86,11 @@ export default function EditFood() {
                 <label htmlFor="servingSize">Serving Size</label>
                 <input type="text" id="servingSize" name="servingSize" placeholder='100 grams' value={formValues.servingSize} onChange={changeHandler} />
                 {errors.servingSize && <p className='error'>{errors.servingSize}</p>}
+            </div>
+
+            <div className="form-row">
+                <CategorySelector onChange={changeHandler} value={formValues.category} />
+                {errors.category && <p className='error'>{errors.category}</p>}
             </div>
 
             <div className="form-row">

@@ -43,7 +43,7 @@ export const createFood = (foodData, ownerId) => {
 
 export const getCreatedFoods = (limit, skip) => {
     const url = baseUrl + `?limit=${limit}&skip=${skip}&count=1`;
-
+    
     return get(url);
 }
 
@@ -59,7 +59,8 @@ export const editFood = (foodId, foodData) => {
         fat: Number(foodData.fat),
         calories: Number(foodData.calories),
         servingSize: foodData.servingSize,
+        category: foodData.category
     };
-
+    
     return put(`${baseUrl}/${foodId}`, body);
 } 
