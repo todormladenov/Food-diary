@@ -7,6 +7,7 @@ import { SnackbarContext } from '../../../contexts/SnackbarContext';
 import { validateCreateFoodInput } from './validateCreateFoodInput';
 import SharedLoader from '../../shared/shared-loader/SharedLoader';
 import { useNavigate } from 'react-router-dom';
+import CategorySelector from '../../shared/category-selector/CategorySelector';
 
 const initialFoodValues = {
     protein: '',
@@ -14,7 +15,8 @@ const initialFoodValues = {
     calories: '',
     carbs: '',
     fat: '',
-    servingSize: ''
+    servingSize: '',
+    category: ''
 };
 
 export default function CreateFood() {
@@ -83,6 +85,11 @@ export default function CreateFood() {
                 <label htmlFor="servingSize">Serving Size</label>
                 <input type="text" id="servingSize" name="servingSize" placeholder='100 grams' value={formValues.servingSize} onChange={changeHandler} />
                 {errors.servingSize && <p className='error'>{errors.servingSize}</p>}
+            </div>
+
+            <div className="form-row">
+                <CategorySelector onChange={changeHandler} value={formValues.category} />
+                {errors.category && <p className='error'>{errors.category}</p>}
             </div>
 
             <div className="form-row">

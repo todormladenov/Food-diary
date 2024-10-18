@@ -36,6 +36,7 @@ export const createFood = (foodData, ownerId) => {
         fat: Number(foodData.fat),
         calories: Number(foodData.calories),
         servingSize: foodData.servingSize,
+        category: foodData.category
     };
     return post(baseUrl, body);
 }
