@@ -21,9 +21,9 @@ export default function CaloriesCalculator() {
         const errors = validateCalculatorInput(values);
         if (errors) {
             return setErrors(errors);
-
         }
 
+        setErrors({});
         changeNutritionGoal(values);
     }
 
