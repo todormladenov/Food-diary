@@ -21,7 +21,8 @@ export default function FoodsCatalog() {
         }
     }
 
-    const handleSearchFoodsByCategory = (category) => {
+    const handleSearchFoodsByCategory = (e) => {
+        const category = e.target.value;
         changeSearchQuery({ category, name: '' });
     }
     
@@ -32,7 +33,7 @@ export default function FoodsCatalog() {
                 <p>Manage your custom foods and track their nutritional value.</p>
             </section>
 
-            <CategorySelector onSearch={handleSearchFoodsByCategory} />
+            <CategorySelector onChange={handleSearchFoodsByCategory} />
 
             <div className="food-container">
                 {isLoading

@@ -27,7 +27,8 @@ export default function AddFoodSection() {
         setHasSearched(true);
     }
 
-    const handleSearchFoodsByCategory = (category) => {
+    const handleSearchFoodsByCategory = (e) => {
+        const category = e.target.value;
         resetFormValues();
         changeSearchQuery({ category, name: '' });
     }
@@ -39,7 +40,7 @@ export default function AddFoodSection() {
                 <h2>Add Food</h2>
             </header>
 
-            <CategorySelector onSearch={handleSearchFoodsByCategory} />
+            <CategorySelector onChange={handleSearchFoodsByCategory} />
 
             <form className="search-form" onSubmit={submitHandler}>
                 <div className="form-row">
